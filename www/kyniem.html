@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Ngày Kỷ Niệm - LoveMore</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/jpeg" href="https://duavamew.asia/photo/logo2.png">
+  <!-- THẺ PREVIEW LINK (OPEN GRAPH CHO FACEBOOK/MESSENGER) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Không Gian Chung Cặp Đôi ♡౨ৎ☆">
+  <meta property="og:description" content="Không gian chung cho cặp đôi và ghi chú ngọt ngào dành riêng cho hai chúng mình.">
+  <meta property="og:image" content="https://duavamew.asia/photo/banner.png">
+  <meta property="og:image:secure_url" content="https://duavamew.asia/photo/banner.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://duavamew.asia/">
+  <meta property="fb:app_id" content="966242223397117">
+
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, #f7a8ca 0%, #f7c5e6 40%, #fad0c4 70%, #ffd1ff 100%);
+      background-attachment: fixed;
+      color: #334155;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* GLASSMORPHISM NAV */
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1.5px solid rgba(255, 255, 255, 0.7);
+      border-radius: 20px;
+    }
+
+    /* GLASSMORPHISM CARDS */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(247, 168, 202, 0.22);
+    }
+
+    /* BẢNG CHỌN NGÀY CUSTOM GLASSMORPHISM POPUP */
+    .glass-datepicker-modal {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      border-radius: 28px;
+      box-shadow: 0 20px 40px rgba(224, 38, 128, 0.25);
+    }
+
+    /* TOAST ANIMATION */
+    .toast-enter {
+      animation: slideDown 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translate(-50%, -20px) scale(0.95); }
+      to { opacity: 1; transform: translate(-50%, 0) scale(1); }
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="pb-10 pt-2 sm:pt-4">
+
+  <!-- THANH MENU GLASSMORPHISM DÙNG CHUNG -->
+  <nav class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 mb-4 sticky top-2 z-40">
+    <div class="glass-nav p-1.5 flex items-center justify-between gap-1 overflow-x-auto no-scrollbar shadow-lg shadow-pink-500/10">
+      <a href="lich.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-slate-700 hover:bg-white/50 font-black text-xs sm:text-sm transition-all shrink-0">
+        <i class="fa-solid fa-house"></i> <span>Lịch</span>
+      </a>
+      <a href="kyniem.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white text-pink-600 font-black text-xs sm:text-sm shadow-sm shrink-0">
+        <i class="fa-solid fa-cake-candles text-pink-500"></i> <span>Kỷ Niệm</span>
+      </a>
+      <a href="bimat.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-slate-700 hover:bg-white/50 font-black text-xs sm:text-sm transition-all shrink-0">
+        <i class="fa-solid fa-vault text-purple-500"></i> <span>Két Bí Mật</span>
+      </a>
+      <a href="kinhnguyet.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-slate-700 hover:bg-white/50 font-black text-xs sm:text-sm transition-all shrink-0">
+        <i class="fa-solid fa-droplet text-rose-500"></i> <span>Chu Kỳ</span>
+      </a>
+      <a href="broai.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-slate-700 hover:bg-white/50 font-black text-xs sm:text-sm transition-all shrink-0">
+        <i class="fa-solid fa-robot text-indigo-500"></i> <span>Bro AI</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- POPUP THÔNG BÁO TOAST GLASSMORPHISM SANG TRỌNG -->
+  <div id="customToast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 opacity-0 pointer-events-none transition-all duration-300 w-[90%] max-w-md">
+    <div class="glass-card p-4 border-2 border-white/90 shadow-2xl flex items-center justify-between gap-3 bg-white/95 backdrop-blur-2xl rounded-2xl">
+      <div class="flex items-center gap-3">
+        <div id="toastIconBg" class="w-10 h-10 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center text-lg shrink-0">
+          <i id="toastIcon" class="fa-solid fa-circle-check"></i>
+        </div>
+        <div>
+          <h4 id="toastTitle" class="font-black text-slate-800 text-xs sm:text-sm leading-tight">Thông báo</h4>
+          <p id="toastMessage" class="text-[11px] sm:text-xs font-bold text-slate-600 mt-0.5">Nội dung thông báo...</p>
+        </div>
+      </div>
+      <button onclick="hideToast()" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center text-xs shrink-0">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- BẢNG CHỌN NGÀY CUSTOM ĐẸP MẮT VỚI TÍNH NĂNG CHỌN NHANH THÁNG / NĂM -->
+  <div id="customDatePickerModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center p-3 opacity-0 pointer-events-none transition-opacity duration-200">
+    <div class="glass-datepicker-modal p-5 w-full max-w-sm transform scale-95 transition-transform duration-200" id="dpModalBox">
+      
+      <!-- VIEW 1: LỊCH CHỌN NGÀY BÌNH THƯỜNG -->
+      <div id="dpCalendarView">
+        <!-- HEADER THÁNG / NĂM (BẤM VÀO ĐỂ CHỌN NHANH THÁNG NĂM) -->
+        <div class="flex items-center justify-between mb-4">
+          <button onclick="changeDpMonth(-1)" class="w-8 h-8 rounded-full bg-pink-100 hover:bg-pink-200 text-pink-600 flex items-center justify-center text-xs font-black shadow-sm transition-all">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          
+          <!-- NÚT BẤM VÀO THÁNG NĂM ĐỂ BẬT MENU CHỌN NHANH -->
+          <button onclick="toggleDpQuickPicker(true)" title="Bấm để chọn nhanh Tháng & Năm" class="px-3 py-1.5 rounded-xl bg-pink-50 hover:bg-pink-100 border border-pink-200 text-pink-700 font-black text-xs sm:text-sm tracking-wide uppercase flex items-center gap-1.5 transition-all shadow-sm">
+            <span id="dpMonthYearText">THÁNG 10, 2026</span>
+            <i class="fa-solid fa-caret-down text-pink-500 text-xs"></i>
+          </button>
+
+          <button onclick="changeDpMonth(1)" class="w-8 h-8 rounded-full bg-pink-100 hover:bg-pink-200 text-pink-600 flex items-center justify-center text-xs font-black shadow-sm transition-all">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+
+        <!-- HÀNG THỨ -->
+        <div class="grid grid-cols-7 gap-1 text-center text-[10px] font-black text-slate-500 mb-2">
+          <div>T2</div><div>T3</div><div>T4</div><div>T5</div><div>T6</div><div class="text-blue-600">T7</div><div class="text-rose-600">CN</div>
+        </div>
+
+        <!-- LƯỚI NGÀY -->
+        <div id="dpDaysGrid" class="grid grid-cols-7 gap-1 text-center mb-4"></div>
+
+        <!-- FOOTER NÚT BẤM -->
+        <div class="flex items-center justify-between gap-2 pt-2 border-t border-slate-200">
+          <button onclick="selectDpToday()" class="px-3 py-1.5 rounded-xl bg-pink-100 hover:bg-pink-200 text-pink-700 font-extrabold text-xs transition-all">
+            <i class="fa-solid fa-calendar-day mr-1"></i> Hôm nay
+          </button>
+          <div class="flex gap-1.5">
+            <button onclick="clearDpValue()" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-extrabold text-xs">Xóa</button>
+            <button onclick="closeCustomDatePicker()" class="px-4 py-1.5 rounded-xl bg-pink-600 hover:bg-pink-700 text-white font-extrabold text-xs shadow-md">Đóng</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 2: GIAO DIỆN CHỌN NHANH 12 THÁNG & CHỌN NĂM -->
+      <div id="dpQuickPickerView" class="hidden">
+        <div class="flex items-center justify-between mb-3 border-b border-pink-100 pb-2">
+          <span class="text-xs font-black text-pink-600 uppercase tracking-wider"><i class="fa-solid fa-list-check mr-1"></i>Chọn Nhanh Tháng & Năm</span>
+          <button onclick="toggleDpQuickPicker(false)" class="text-xs font-bold text-slate-500 hover:text-pink-600">
+            <i class="fa-solid fa-arrow-left mr-1"></i>Quay lại
+          </button>
+        </div>
+
+        <!-- CHỌN NĂM NGHỆ THUẬT -->
+        <div class="flex items-center justify-center gap-2 mb-3 bg-pink-50/80 p-2 rounded-2xl border border-pink-200">
+          <button onclick="changeDpQuickYear(-1)" class="w-8 h-8 rounded-xl bg-white hover:bg-pink-100 text-pink-600 flex items-center justify-center text-xs font-black shadow-sm">
+            <i class="fa-solid fa-minus"></i>
+          </button>
+          <select id="dpYearSelect" onchange="onDpYearSelectChange()" class="bg-white text-slate-800 text-xs font-black rounded-xl px-3 py-1.5 outline-none border border-pink-300 text-center cursor-pointer shadow-sm">
+            <!-- JS tự sinh các năm -->
+          </select>
+          <button onclick="changeDpQuickYear(1)" class="w-8 h-8 rounded-xl bg-white hover:bg-pink-100 text-pink-600 flex items-center justify-center text-xs font-black shadow-sm">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+
+        <!-- LƯỚI 12 THÁNG -->
+        <div class="grid grid-cols-3 gap-2 mb-3" id="dpMonthsGrid">
+          <!-- JS tự sinh 12 nút tháng -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <main class="max-w-4xl mx-auto px-2 sm:px-4">
+    
+    <!-- BANNER BỘ ĐẾM NGÀY YÊU NHAU -->
+    <div class="glass-card p-5 sm:p-6 text-center mb-4 sm:mb-6 border-2 border-pink-200 relative overflow-hidden">
+      <div class="w-14 h-14 sm:w-16 sm:h-16 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center text-2xl sm:text-3xl mx-auto mb-2 shadow-inner">
+        <i class="fa-solid fa-heart-pulse animate-pulse"></i>
+      </div>
+      <h2 class="text-xs sm:text-base font-black text-slate-800 uppercase tracking-wider">CHÚNG TA ĐÃ YÊU NHAU</h2>
+      <div class="text-3xl sm:text-5xl font-black text-pink-600 my-1.5 drop-shadow-sm" id="loveDaysCounter">0 NGÀY</div>
+      <p class="text-[11px] sm:text-xs font-extrabold text-slate-500" id="loveStartDateText">Từ ngày: --/--/----</p>
+    </div>
+
+    <!-- KHU VỰC SINH NHẬT -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      
+      <!-- CARD 1: SINH NHẬT CỦA TÔI -->
+      <div class="glass-card p-4 sm:p-5">
+        <div class="flex items-center gap-2.5 mb-3.5">
+          <div class="w-9 h-9 bg-pink-100 text-pink-600 rounded-xl flex items-center justify-center text-lg shrink-0">
+            <i class="fa-solid fa-cake-candles"></i>
+          </div>
+          <h3 class="font-black text-slate-800 text-sm sm:text-base">Sinh Nhật Của Tôi</h3>
+        </div>
+
+        <div class="space-y-3">
+          <div>
+            <label class="block text-[10px] font-black text-pink-600 uppercase mb-1">Ngày sinh nhật</label>
+            <div class="relative cursor-pointer" onclick="openCustomDatePicker('myBirthdayInput')">
+              <input type="text" id="myBirthdayInput" readonly placeholder="Chọn ngày (dd/mm/yyyy)" class="w-full p-2.5 pr-10 bg-white/90 border border-slate-200 rounded-xl text-xs sm:text-sm font-extrabold text-slate-800 cursor-pointer shadow-sm focus:outline-none">
+              <i class="fa-solid fa-calendar-days absolute right-3 top-1/2 -translate-y-1/2 text-pink-500 text-base pointer-events-none"></i>
+            </div>
+          </div>
+          <div>
+            <label class="block text-[10px] font-black text-slate-500 uppercase mb-1">Ghi chú sở thích quà tặng</label>
+            <textarea id="myBirthdayNote" placeholder="Ghi chú món quà bạn yêu thích..." class="w-full p-2.5 bg-white/90 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none shadow-sm" rows="2"></textarea>
+          </div>
+          <button onclick="saveMyBirthday()" class="w-full py-2.5 bg-pink-600 hover:bg-pink-700 active:scale-98 text-white font-black text-xs sm:text-sm rounded-xl shadow-md transition-all">
+            <i class="fa-solid fa-floppy-disk mr-1.5"></i>Lưu Sinh Nhật Tôi
+          </button>
+        </div>
+      </div>
+
+      <!-- CARD 2: SINH NHẬT ĐỐI PHƯƠNG -->
+      <div class="glass-card p-4 sm:p-5">
+        <div class="flex items-center gap-2.5 mb-3.5">
+          <div class="w-9 h-9 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center text-lg shrink-0">
+            <i class="fa-solid fa-gift"></i>
+          </div>
+          <h3 class="font-black text-slate-800 text-sm sm:text-base" id="loverBirthdayTitle">Sinh Nhật Đối Phương</h3>
+        </div>
+
+        <div class="space-y-3">
+          <div>
+            <label class="block text-[10px] font-black text-purple-600 uppercase mb-1">Ngày sinh nhật</label>
+            <div class="relative cursor-pointer" onclick="openCustomDatePicker('loverBirthdayInput')">
+              <input type="text" id="loverBirthdayInput" readonly placeholder="Chọn ngày (dd/mm/yyyy)" class="w-full p-2.5 pr-10 bg-white/90 border border-slate-200 rounded-xl text-xs sm:text-sm font-extrabold text-slate-800 cursor-pointer shadow-sm focus:outline-none">
+              <i class="fa-solid fa-calendar-days absolute right-3 top-1/2 -translate-y-1/2 text-purple-500 text-base pointer-events-none"></i>
+            </div>
+          </div>
+          <div>
+            <label class="block text-[10px] font-black text-slate-500 uppercase mb-1">Ý tưởng quà tặng cho người ấy</label>
+            <textarea id="loverBirthdayNote" placeholder="Gợi ý quà tặng dành cho anh/em..." class="w-full p-2.5 bg-white/90 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-purple-400 resize-none shadow-sm" rows="2"></textarea>
+          </div>
+          <button onclick="saveLoverBirthday()" class="w-full py-2.5 bg-purple-600 hover:bg-purple-700 active:scale-98 text-white font-black text-xs sm:text-sm rounded-xl shadow-md transition-all">
+            <i class="fa-solid fa-floppy-disk mr-1.5"></i>Lưu Sinh Nhật Người Ấy
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- KHU VỰC THIẾT LẬP NGÀY YÊU NHAU -->
+    <div class="glass-card p-4 sm:p-5 mt-4">
+      <div class="flex items-center gap-2.5 mb-3">
+        <div class="w-9 h-9 bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center text-lg shrink-0">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <div>
+          <h3 class="font-black text-slate-800 text-sm sm:text-base">Thiết Lập Ngày Yêu Nhau</h3>
+          <p class="text-[10px] sm:text-xs font-bold text-slate-500">Thông tin này sẽ lưu chung và tự đồng bộ cho cả hai bạn</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-2.5 mt-2">
+        <div class="relative flex-1 cursor-pointer" onclick="openCustomDatePicker('loveStartDateInput')">
+          <input type="text" id="loveStartDateInput" readonly placeholder="Chọn ngày yêu (dd/mm/yyyy)" class="w-full p-2.5 pr-10 bg-white/90 border border-slate-200 rounded-xl text-xs sm:text-sm font-extrabold text-slate-800 cursor-pointer shadow-sm focus:outline-none">
+          <i class="fa-solid fa-calendar-heart absolute right-3 top-1/2 -translate-y-1/2 text-rose-500 text-base pointer-events-none"></i>
+        </div>
+        <button onclick="saveLoveDate()" class="px-5 py-2.5 bg-rose-600 hover:bg-rose-700 active:scale-98 text-white font-black text-xs sm:text-sm rounded-xl shadow-md transition-all shrink-0">
+          <i class="fa-solid fa-heart-circle-check mr-1.5"></i>Lưu Ngày Yêu
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    const firebaseConfig = { databaseURL: "https://lichcuatui-default-rtdb.asia-southeast1.firebasedatabase.app/" };
+    let db = null;
+    try { db = getDatabase(initializeApp(firebaseConfig)); } catch(e){}
+
+    let currentUser = JSON.parse(localStorage.getItem('COUPLE_CALENDAR_USER'));
+    if(!currentUser) window.location.href = "index.html";
+
+    const isBoy = currentUser.role === 'Boy';
+    document.getElementById('loverBirthdayTitle').innerText = isBoy ? "Sinh Nhật Em" : "Sinh Nhật Anh";
+
+    /* ======================================================== */
+    /* BẢNG CHỌN NGÀY TÍCH HỢP CHỌN NHANH THÁNG/NĂM              */
+    /* ======================================================== */
+    let dpTargetInputId = null;
+    let dpCurrentDate = new Date();
+    let dpSelectedIso = '';
+
+    window.openCustomDatePicker = function(inputId) {
+      dpTargetInputId = inputId;
+      const val = document.getElementById(inputId).getAttribute('data-iso') || '';
+      if (val) {
+        dpCurrentDate = new Date(val);
+        dpSelectedIso = val;
+      } else {
+        dpCurrentDate = new Date();
+        dpSelectedIso = '';
+      }
+      toggleDpQuickPicker(false); // Mặc định về lại Lịch xem ngày
+      renderCustomDatePicker();
+      document.getElementById('customDatePickerModal').classList.remove('opacity-0', 'pointer-events-none');
+      document.getElementById('dpModalBox').classList.remove('scale-95');
+    };
+
+    window.closeCustomDatePicker = function() {
+      document.getElementById('customDatePickerModal').classList.add('opacity-0', 'pointer-events-none');
+      document.getElementById('dpModalBox').classList.add('scale-95');
+    };
+
+    window.changeDpMonth = function(offset) {
+      dpCurrentDate.setMonth(dpCurrentDate.getMonth() + offset);
+      renderCustomDatePicker();
+    };
+
+    // CHUYỂN ĐỔI QUA LẠI GIỮA LỊCH NGÀY VÀ BẢNG CHỌN NHANH THÁNG/NĂM
+    window.toggleDpQuickPicker = function(showQuick) {
+      const calView = document.getElementById('dpCalendarView');
+      const quickView = document.getElementById('dpQuickPickerView');
+
+      if (showQuick) {
+        calView.classList.add('hidden');
+        quickView.classList.remove('hidden');
+        populateDpQuickPicker();
+      } else {
+        quickView.classList.add('hidden');
+        calView.classList.remove('hidden');
+        renderCustomDatePicker();
+      }
+    };
+
+    function populateDpQuickPicker() {
+      const yearSelect = document.getElementById('dpYearSelect');
+      yearSelect.innerHTML = '';
+      const currentY = dpCurrentDate.getFullYear();
+
+      // Sinh danh sách các năm từ 1970 đến 2035
+      for (let y = 1970; y <= 2035; y++) {
+        const opt = document.createElement('option');
+        opt.value = y;
+        opt.innerText = `Năm ${y}`;
+        if (y === currentY) opt.selected = true;
+        yearSelect.appendChild(opt);
+      }
+
+      const monthsGrid = document.getElementById('dpMonthsGrid');
+      monthsGrid.innerHTML = '';
+      const currentM = dpCurrentDate.getMonth();
+
+      // Sinh 12 nút bấm tháng
+      for (let m = 0; m < 12; m++) {
+        const btn = document.createElement('button');
+        const isSelected = (m === currentM);
+        btn.className = `py-2 rounded-xl text-xs font-black transition-all ${
+          isSelected
+            ? 'bg-pink-600 text-white shadow-md scale-105'
+            : 'bg-white hover:bg-pink-100 text-slate-700 hover:text-pink-600 border border-slate-200'
+        }`;
+        btn.innerText = `Tháng ${m + 1}`;
+        btn.onclick = () => {
+          dpCurrentDate.setMonth(m);
+          toggleDpQuickPicker(false); // Chọn xong tháng tự nhảy lại xem lịch ngày
+        };
+        monthsGrid.appendChild(btn);
+      }
+    }
+
+    window.changeDpQuickYear = function(offset) {
+      dpCurrentDate.setFullYear(dpCurrentDate.getFullYear() + offset);
+      populateDpQuickPicker();
+    };
+
+    window.onDpYearSelectChange = function() {
+      const yearSelect = document.getElementById('dpYearSelect');
+      dpCurrentDate.setFullYear(parseInt(yearSelect.value));
+      populateDpQuickPicker();
+    };
+
+    function renderCustomDatePicker() {
+      const year = dpCurrentDate.getFullYear();
+      const month = dpCurrentDate.getMonth();
+      
+      document.getElementById('dpMonthYearText').innerHTML = `THÁNG ${month + 1}, ${year} <i class="fa-solid fa-caret-down text-pink-500 text-xs ml-0.5"></i>`;
+
+      const grid = document.getElementById('dpDaysGrid');
+      grid.innerHTML = '';
+
+      const firstDay = new Date(year, month, 1);
+      let dayOfWeek = firstDay.getDay() - 1;
+      if (dayOfWeek === -1) dayOfWeek = 6;
+
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const prevMonthDays = new Date(year, month, 0).getDate();
+
+      for (let i = dayOfWeek - 1; i >= 0; i--) {
+        const cell = document.createElement('div');
+        cell.className = "py-1.5 text-xs font-bold text-slate-300 pointer-events-none";
+        cell.innerText = prevMonthDays - i;
+        grid.appendChild(cell);
+      }
+
+      const todayStr = new Date().toISOString().split('T')[0];
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const mStr = (month + 1) < 10 ? `0${month + 1}` : `${month + 1}`;
+        const dStr = day < 10 ? `0${day}` : `${day}`;
+        const iso = `${year}-${mStr}-${dStr}`;
+
+        const cell = document.createElement('button');
+        let baseClass = "py-1.5 text-xs font-black rounded-xl transition-all cursor-pointer flex items-center justify-center ";
+
+        if (iso === dpSelectedIso) {
+          baseClass += "bg-pink-600 text-white shadow-md shadow-pink-300 scale-105";
+        } else if (iso === todayStr) {
+          baseClass += "border-2 border-pink-400 text-pink-600 bg-pink-50 hover:bg-pink-100";
+        } else {
+          baseClass += "text-slate-700 hover:bg-pink-100 hover:text-pink-600";
+        }
+
+        cell.className = baseClass;
+        cell.innerText = day;
+        cell.onclick = () => selectDpDate(iso, `${dStr}/${mStr}/${year}`);
+        grid.appendChild(cell);
+      }
+    }
+
+    function selectDpDate(iso, formatted) {
+      if (!dpTargetInputId) return;
+      const input = document.getElementById(dpTargetInputId);
+      input.value = formatted;
+      input.setAttribute('data-iso', iso);
+      closeCustomDatePicker();
+    }
+
+    window.selectDpToday = function() {
+      const today = new Date();
+      const y = today.getFullYear();
+      const m = (today.getMonth() + 1) < 10 ? `0${today.getMonth() + 1}` : `${today.getMonth() + 1}`;
+      const d = today.getDate() < 10 ? `0${today.getDate()}` : `${today.getDate()}`;
+      selectDpDate(`${y}-${m}-${d}`, `${d}/${m}/${y}`);
+    };
+
+    window.clearDpValue = function() {
+      if (dpTargetInputId) {
+        const input = document.getElementById(dpTargetInputId);
+        input.value = '';
+        input.removeAttribute('data-iso');
+      }
+      closeCustomDatePicker();
+    };
+
+    /* ======================================================== */
+    /* LOGIC THÔNG BÁO POPUP & FIREBASE DB                      */
+    /* ======================================================== */
+    window.showToast = function(title, message, type = 'success') {
+      const toast = document.getElementById('customToast');
+      const toastTitle = document.getElementById('toastTitle');
+      const toastMessage = document.getElementById('toastMessage');
+      const toastIcon = document.getElementById('toastIcon');
+      const toastIconBg = document.getElementById('toastIconBg');
+
+      toastTitle.innerText = title;
+      toastMessage.innerText = message;
+
+      if(type === 'success') {
+        toastIconBg.className = "w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg shrink-0";
+        toastIcon.className = "fa-solid fa-circle-check";
+      } else if(type === 'warning') {
+        toastIconBg.className = "w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-lg shrink-0";
+        toastIcon.className = "fa-solid fa-triangle-exclamation";
+      } else {
+        toastIconBg.className = "w-10 h-10 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center text-lg shrink-0";
+        toastIcon.className = "fa-solid fa-heart";
+      }
+
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      toast.classList.add('toast-enter');
+
+      setTimeout(() => { hideToast(); }, 3200);
+    };
+
+    window.hideToast = function() {
+      const toast = document.getElementById('customToast');
+      toast.classList.add('opacity-0', 'pointer-events-none');
+      toast.classList.remove('toast-enter');
+    };
+
+    function setFormattedDateToInput(inputId, isoDate) {
+      if (!isoDate) return;
+      const parts = isoDate.split('-');
+      if (parts.length === 3) {
+        const formatted = `${parts[2]}/${parts[1]}/${parts[0]}`;
+        const input = document.getElementById(inputId);
+        input.value = formatted;
+        input.setAttribute('data-iso', isoDate);
+      }
+    }
+
+    function loadData() {
+      if(!db || !currentUser.roomCode) return;
+
+      const roomAnniversariesRef = ref(db, `rooms/${currentUser.roomCode}/anniversaries`);
+      
+      onValue(roomAnniversariesRef, (snapshot) => {
+        const data = snapshot.val() || {};
+
+        if (data.loveStartDate) {
+          setFormattedDateToInput('loveStartDateInput', data.loveStartDate);
+          calculateLoveDays(data.loveStartDate);
+        }
+
+        if (isBoy) {
+          if(data.boyBirthday) setFormattedDateToInput('myBirthdayInput', data.boyBirthday);
+          if(data.boyBirthdayNote) document.getElementById('myBirthdayNote').value = data.boyBirthdayNote;
+          if(data.girlBirthday) setFormattedDateToInput('loverBirthdayInput', data.girlBirthday);
+          if(data.girlBirthdayNote) document.getElementById('loverBirthdayNote').value = data.girlBirthdayNote;
+        } else {
+          if(data.girlBirthday) setFormattedDateToInput('myBirthdayInput', data.girlBirthday);
+          if(data.girlBirthdayNote) document.getElementById('myBirthdayNote').value = data.girlBirthdayNote;
+          if(data.boyBirthday) setFormattedDateToInput('loverBirthdayInput', data.boyBirthday);
+          if(data.boyBirthdayNote) document.getElementById('loverBirthdayNote').value = data.boyBirthdayNote;
+        }
+      });
+    }
+
+    function calculateLoveDays(startDateStr) {
+      const start = new Date(startDateStr);
+      const today = new Date();
+      const diffTime = Math.abs(today - start);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      document.getElementById('loveDaysCounter').innerText = `${diffDays} NGÀY`;
+      document.getElementById('loveStartDateText').innerText = `Từ ngày: ${startDateStr.split('-').reverse().join('/')}`;
+    }
+
+    window.saveLoveDate = function() {
+      const isoVal = document.getElementById('loveStartDateInput').getAttribute('data-iso');
+      if(!isoVal) {
+        showToast("Thiếu thông tin", "Vui lòng chọn ngày bắt đầu yêu nhau!", "warning");
+        return;
+      }
+      if(db && currentUser.roomCode) {
+        set(ref(db, `rooms/${currentUser.roomCode}/anniversaries/loveStartDate`), isoVal);
+        showToast("Đã lưu thành công!", "Ngày kỷ niệm yêu nhau đã đồng bộ cho cả hai bạn! ❤️", "love");
+      }
+    };
+
+    window.saveMyBirthday = function() {
+      const isoVal = document.getElementById('myBirthdayInput').getAttribute('data-iso');
+      const noteVal = document.getElementById('myBirthdayNote').value;
+
+      if(!isoVal) {
+        showToast("Thiếu thông tin", "Vui lòng chọn ngày sinh nhật của bạn!", "warning");
+        return;
+      }
+
+      if(db && currentUser.roomCode) {
+        const keyPrefix = isBoy ? 'boy' : 'girl';
+        set(ref(db, `rooms/${currentUser.roomCode}/anniversaries/${keyPrefix}Birthday`), isoVal);
+        set(ref(db, `rooms/${currentUser.roomCode}/anniversaries/${keyPrefix}BirthdayNote`), noteVal);
+        showToast("Lưu thành công!", "Thông tin sinh nhật của bạn đã cập nhật cho đối phương thấy! 🎂", "success");
+      }
+    };
+
+    window.saveLoverBirthday = function() {
+      const isoVal = document.getElementById('loverBirthdayInput').getAttribute('data-iso');
+      const noteVal = document.getElementById('loverBirthdayNote').value;
+
+      if(!isoVal) {
+        showToast("Thiếu thông tin", "Vui lòng chọn ngày sinh nhật của người ấy!", "warning");
+        return;
+      }
+
+      if(db && currentUser.roomCode) {
+        const keyPrefix = isBoy ? 'girl' : 'boy';
+        set(ref(db, `rooms/${currentUser.roomCode}/anniversaries/${keyPrefix}Birthday`), isoVal);
+        set(ref(db, `rooms/${currentUser.roomCode}/anniversaries/${keyPrefix}BirthdayNote`), noteVal);
+        showToast("Lưu thành công!", "Đã ghi nhận sinh nhật và gợi ý quà tặng cho đối phương! 🎁", "success");
+      }
+    };
+
+    loadData();
+  </script>
+</body>
+</html>

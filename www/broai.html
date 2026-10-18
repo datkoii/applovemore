@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Trợ Lý Tình Yêu - LoveMore</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/jpeg" href="https://duavamew.asia/photo/logo2.png">
+  <!-- THẺ PREVIEW LINK (OPEN GRAPH CHO FACEBOOK/MESSENGER) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Không Gian Chung Cặp Đôi ♡౨ৎ☆">
+  <meta property="og:description" content="Không gian chung cho cặp đôi và ghi chú ngọt ngào dành riêng cho hai chúng mình.">
+  <meta property="og:image" content="https://duavamew.asia/photo/banner.png">
+  <meta property="og:image:secure_url" content="https://duavamew.asia/photo/banner.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://duavamew.asia/">
+  <meta property="fb:app_id" content="966242223397117">
+
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, #f7a8ca 0%, #f7c5e6 40%, #fad0c4 70%, #ffd1ff 100%);
+      background-attachment: fixed;
+      color: #334155;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* GLASSMORPHISM NAV */
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1.5px solid rgba(255, 255, 255, 0.7);
+      border-radius: 20px;
+    }
+
+    /* CONTAINER KHUNG CHAT */
+    .chat-card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+      border-radius: 28px;
+      box-shadow: 0 12px 36px rgba(224, 38, 128, 0.12);
+    }
+
+    /* BONG BÓNG TIN NHẮN */
+    .msg-ai {
+      background: #ffffff;
+      color: #1e293b;
+      border-radius: 20px 20px 20px 4px;
+      border: 1px solid #f1f5f9;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .msg-user {
+      background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+      color: #ffffff;
+      border-radius: 20px 20px 4px 20px;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+
+    /* HIỆU ỨNG ĐANG GÕ */
+    .typing-dot {
+      animation: typing 1.4s infinite ease-in-out;
+    }
+    .typing-dot:nth-child(1) { animation-delay: 0s; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typing {
+      0%, 100% { transform: translateY(0); opacity: 0.4; }
+      50% { transform: translateY(-4px); opacity: 1; }
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="pb-6 pt-2 sm:pt-4">
+
+  <!-- THANH MENU NAVIGATION -->
+  <nav class="max-w-xl lg:max-w-4xl mx-auto px-2 sm:px-4 mb-3 sticky top-2 z-40">
+    <div class="glass-nav p-1.5 flex items-center justify-between gap-1 overflow-x-auto no-scrollbar shadow-lg shadow-pink-500/10">
+      <a href="lich.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-slate-700 hover:bg-white/50 font-black text-xs sm:text-sm transition-all shrink-0">
+        <i class="fa-solid fa-house"></i> <span>Lịch</span>
+      </a>
+      <a href="kyniem.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-slate-700 hover:bg-white/50 font-black text-xs sm:text-sm transition-all shrink-0">
+        <i class="fa-solid fa-cake-candles text-pink-500"></i> <span>Kỷ Niệm</span>
+      </a>
+      <a href="bimat.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-slate-700 hover:bg-white/50 font-black text-xs sm:text-sm transition-all shrink-0">
+        <i class="fa-solid fa-vault text-purple-500"></i> <span>Két Bí Mật</span>
+      </a>
+      <a href="kinhnguyet.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-slate-700 hover:bg-white/50 font-black text-xs sm:text-sm transition-all shrink-0">
+        <i class="fa-solid fa-droplet text-rose-500"></i> <span>Chu Kỳ</span>
+      </a>
+      <a href="broai.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white text-indigo-600 font-black text-xs sm:text-sm shadow-sm shrink-0">
+        <i class="fa-solid fa-robot text-indigo-500"></i> <span>Bro AI</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- KHUNG CHAT CHÍNH -->
+  <main class="max-w-xl lg:max-w-4xl mx-auto px-2 sm:px-4">
+    <div class="chat-card flex flex-col h-[82vh] sm:h-[85vh] p-3 sm:p-5 relative overflow-hidden">
+      
+      <!-- HEADER CHAT -->
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-2 shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-indigo-600 text-white flex items-center justify-center text-xl shadow-md shadow-indigo-300">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <div>
+            <h1 class="text-base sm:text-lg font-black text-slate-800 leading-tight">Bro AI - Trợ Lý Tình Yêu</h1>
+            <p class="text-[10px] sm:text-xs font-extrabold text-emerald-600 flex items-center gap-1 mt-0.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Sẵn sàng lắng nghe & tư vấn 24/7
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- VÙNG CHỨA NỘI DUNG TIN NHẮN -->
+      <div id="chatMessages" class="flex-1 overflow-y-auto space-y-3.5 pr-1 py-2">
+        <div class="flex items-start gap-2.5 max-w-[88%] sm:max-w-[80%]">
+          <div class="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center text-sm shrink-0 shadow-sm mt-1">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <div class="msg-ai p-3.5 text-xs sm:text-sm font-semibold leading-relaxed">
+            Chào bạn! Mình là **Bro AI** – Trợ lý chuyên tư vấn tâm lý tình cảm riêng cho cặp đôi. Bạn đang có băn khoăn hay chuyện gì muốn tâm sự không?
+          </div>
+        </div>
+      </div>
+
+      <!-- TYPING INDICATOR -->
+      <div id="typingIndicator" class="hidden flex items-center gap-2 text-slate-400 text-xs font-bold px-2 py-1 my-1">
+        <div class="w-6 h-6 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center text-xs">
+          <i class="fa-solid fa-ellipsis"></i>
+        </div>
+        <span>Bro AI đang suy nghĩ...</span>
+        <div class="flex gap-1 items-center">
+          <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 typing-dot"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 typing-dot"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 typing-dot"></span>
+        </div>
+      </div>
+
+      <!-- Ô NHẬP TIN NHẮN -->
+      <form onsubmit="handleSendMessage(event)" class="mt-2 pt-2 border-t border-slate-100 flex items-center gap-2 shrink-0">
+        <input type="text" id="userInput" placeholder="Nhập câu hỏi hoặc tâm sự của bạn tại đây..." autocomplete="off" class="flex-1 p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs sm:text-sm font-bold text-slate-800 outline-none focus:ring-2 focus:ring-indigo-400 shadow-sm">
+        <button type="submit" id="btnSend" class="px-4 sm:px-5 py-3 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-black text-xs sm:text-sm rounded-2xl shadow-md shadow-indigo-200 transition-all flex items-center gap-1.5 shrink-0">
+          <span>Gửi</span> <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </form>
+
+    </div>
+  </main>
+
+  <script>
+    const SYSTEM_PROMPT = `Bạn là Bro AI - một trợ lý chuyên gia tư vấn tâm lý tình yêu, thấu hiểu phụ nữ và có kinh nghiệm giải quyết mâu thuẫn cặp đôi.
+Mục tiêu của bạn:
+1. Trả lời bằng tiếng Việt tinh tế, chân thành, hóm hỉnh, ấm áp và thực tế.
+2. Đưa ra những lời khuyên sâu sắc giúp người dùng hiểu rõ cảm xúc của đối phương và cách chăm sóc mối quan hệ tốt nhất.
+3. Luôn giữ phong thái như một người anh/người bạn thân thiết (Bro).`;
+
+    let chatHistory = [];
+
+    function scrollToBottom() {
+      const container = document.getElementById('chatMessages');
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function appendUserMessage(text) {
+      const container = document.getElementById('chatMessages');
+      const div = document.createElement('div');
+      div.className = "flex items-start justify-end gap-2.5 max-w-[88%] sm:max-w-[80%] ml-auto";
+      div.innerHTML = `
+        <div class="msg-user p-3.5 text-xs sm:text-sm font-extrabold leading-relaxed">
+          ${escapeHtml(text)}
+        </div>
+      `;
+      container.appendChild(div);
+      scrollToBottom();
+    }
+
+    function appendAiMessage(text) {
+      const container = document.getElementById('chatMessages');
+      const div = document.createElement('div');
+      div.className = "flex items-start gap-2.5 max-w-[88%] sm:max-w-[80%]";
+      div.innerHTML = `
+        <div class="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center text-sm shrink-0 shadow-sm mt-1">
+          <i class="fa-solid fa-robot"></i>
+        </div>
+        <div class="msg-ai p-3.5 text-xs sm:text-sm font-semibold leading-relaxed whitespace-pre-line">
+          ${formatMarkdownText(text)}
+        </div>
+      `;
+      container.appendChild(div);
+      scrollToBottom();
+    }
+
+    function escapeHtml(text) {
+      return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    function formatMarkdownText(text) {
+      return escapeHtml(text)
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>');
+    }
+
+    // GỬI REQUEST TRỰC TIẾP DÙNG MODEL OPENAI (CHUẨN FREE KHÔNG BỊ LỖI NOT FOUND)
+    window.handleSendMessage = async function(e) {
+      e.preventDefault();
+      const inputEl = document.getElementById('userInput');
+      const userText = inputEl.value.trim();
+
+      if (!userText) return;
+
+      appendUserMessage(userText);
+      inputEl.value = '';
+
+      document.getElementById('typingIndicator').classList.remove('hidden');
+      scrollToBottom();
+
+      chatHistory.push({ role: "user", content: userText });
+
+      try {
+        const response = await fetch('https://text.pollinations.ai/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            messages: [
+              { role: "system", content: SYSTEM_PROMPT },
+              ...chatHistory
+            ],
+            model: "openai"
+          })
+        });
+
+        const replyText = await response.text();
+        document.getElementById('typingIndicator').classList.add('hidden');
+
+        // Kiểm tra nếu có lỗi trả về dạng JSON từ máy chủ
+        if (replyText.startsWith('{') && replyText.includes('"error"')) {
+          appendAiMessage("Bro AI đang có chút gián đoạn nhỏ, bạn thử bấm gửi lại câu hỏi nhé!");
+          return;
+        }
+
+        if (replyText && replyText.trim().length > 0) {
+          chatHistory.push({ role: "assistant", content: replyText });
+          appendAiMessage(replyText);
+        } else {
+          appendAiMessage("Xin lỗi, Bro chưa nghe rõ. Bạn hãy hỏi lại nhé!");
+        }
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById('typingIndicator').classList.add('hidden');
+        appendAiMessage("⚠️ Không thể kết nối tới máy chủ AI. Bạn hãy thử kiểm tra lại kết nối mạng xem nhé!");
+      }
+    };
+  </script>
+</body>
+</html>

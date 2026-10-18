@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Lịch Chu Kỳ - LoveMore</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/jpeg" href="https://duavamew.asia/photo/logo2.png">
+  <!-- THẺ PREVIEW LINK (OPEN GRAPH CHO FACEBOOK/MESSENGER) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Không Gian Chung Cặp Đôi ♡౨ৎ☆">
+  <meta property="og:description" content="Không gian chung cho cặp đôi và ghi chú ngọt ngào dành riêng cho hai chúng mình.">
+  <meta property="og:image" content="https://duavamew.asia/photo/banner.png">
+  <meta property="og:image:secure_url" content="https://duavamew.asia/photo/banner.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://duavamew.asia/">
+  <meta property="fb:app_id" content="966242223397117">
+
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, #f7a8ca 0%, #f7c5e6 40%, #fad0c4 70%, #ffd1ff 100%);
+      background-attachment: fixed;
+      color: #334155;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* GLASSMORPHISM NAV */
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1.5px solid rgba(255, 255, 255, 0.7);
+      border-radius: 20px;
+    }
+
+    /* CONTAINER KHUNG LỊCH GIỐNG HÌNH MẪU */
+    .app-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(20px);
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+      border-radius: 28px;
+      box-shadow: 0 12px 36px rgba(224, 38, 128, 0.12);
+    }
+
+    .sub-card {
+      background: #ffffff;
+      border: 1px solid #f1f5f9;
+      border-radius: 22px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    }
+
+    /* MÀU SẮC DẠNG Ô NGÀY CHU KỲ */
+    .day-pill {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 13px;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin: 0 auto;
+    }
+    @media (min-width: 640px) {
+      .day-pill { width: 44px; height: 44px; font-size: 15px; border-radius: 14px; }
+    }
+
+    /* CÁC TRẠNG THÁI MÀU PHIÊN BẢN HÌNH MẪU */
+    .phase-kinh-nguyet { background-color: #fee2e2; color: #dc2626; } /* Kinh nguyệt (Đỏ nhạt) */
+    .phase-nang-trung { background-color: #e6f4f1; color: #0d9488; }  /* Nang trứng (Xanh ngọc) */
+    .phase-rung-trung { background-color: #f3e8ff; color: #9333ea; }  /* Rụng trứng (Tím) */
+    .phase-hoang-the { background-color: #e0f2fe; color: #0284c7; }   /* Hoàng thể (Xanh dương) */
+    .phase-truoc-kinh { background-color: #ffedd5; color: #ea580c; }  /* Trước kinh (Cam đào) */
+    .phase-tre-kinh { background-color: #f1f5f9; color: #64748b; }    /* Trễ kinh (Xám) */
+    .phase-normal { background-color: #f8fafc; color: #334155; }       /* Bình thường */
+
+    /* Ô ĐỎ NỔI BẬT DỰ ĐOÁN NGÀY KẾT THÚC KINH (MỐC 6 NGÀY) */
+    .day-end-period {
+      background-color: #ff4b5c !important;
+      color: #ffffff !important;
+      box-shadow: 0 6px 16px rgba(255, 75, 92, 0.45) !important;
+      font-weight: 900 !important;
+    }
+
+    .day-selected:not(.day-end-period) {
+      border: 2.5px solid #ff4b5c;
+      transform: scale(1.08);
+    }
+
+    /* TOAST ANIMATION */
+    .toast-enter { animation: slideDown 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translate(-50%, -20px) scale(0.95); }
+      to { opacity: 1; transform: translate(-50%, 0) scale(1); }
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="pb-10 pt-2 sm:pt-4">
+
+  <!-- THANH MENU NAVIGATION -->
+  <nav class="max-w-xl lg:max-w-5xl mx-auto px-2 sm:px-4 mb-3 sticky top-2 z-40">
+    <div class="glass-nav p-1.5 flex items-center justify-between gap-1 overflow-x-auto no-scrollbar shadow-lg shadow-pink-500/10">
+      <a href="lich.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-slate-700 hover:bg-white/50 font-black text-xs sm:text-sm transition-all shrink-0">
+        <i class="fa-solid fa-house"></i> <span>Lịch</span>
+      </a>
+      <a href="kyniem.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-slate-700 hover:bg-white/50 font-black text-xs sm:text-sm transition-all shrink-0">
+        <i class="fa-solid fa-cake-candles text-pink-500"></i> <span>Kỷ Niệm</span>
+      </a>
+      <a href="bimat.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-slate-700 hover:bg-white/50 font-black text-xs sm:text-sm transition-all shrink-0">
+        <i class="fa-solid fa-vault text-purple-500"></i> <span>Két Bí Mật</span>
+      </a>
+      <a href="kinhnguyet.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white text-rose-600 font-black text-xs sm:text-sm shadow-sm shrink-0">
+        <i class="fa-solid fa-droplet text-rose-500"></i> <span>Chu Kỳ</span>
+      </a>
+      <a href="broai.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-slate-700 hover:bg-white/50 font-black text-xs sm:text-sm transition-all shrink-0">
+        <i class="fa-solid fa-robot text-indigo-500"></i> <span>Bro AI</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="customToast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 opacity-0 pointer-events-none transition-all duration-300 w-[90%] max-w-sm">
+    <div class="bg-white/95 backdrop-blur-xl p-3.5 border-2 border-pink-200 shadow-2xl flex items-center justify-between gap-3 rounded-2xl">
+      <div class="flex items-center gap-2.5">
+        <div id="toastIconBg" class="w-8 h-8 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-sm shrink-0">
+          <i id="toastIcon" class="fa-solid fa-droplet"></i>
+        </div>
+        <div>
+          <h4 id="toastTitle" class="font-black text-slate-800 text-xs leading-tight">Thông báo</h4>
+          <p id="toastMessage" class="text-[11px] font-bold text-slate-600 mt-0.5">Nội dung thông báo...</p>
+        </div>
+      </div>
+      <button onclick="hideToast()" class="w-6 h-6 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  </div>
+
+  <!-- CONTAINER CHÍNH -->
+  <main class="max-w-xl lg:max-w-5xl mx-auto px-2 sm:px-4">
+    
+    <div class="app-card p-4 sm:p-6 lg:p-7 space-y-4">
+      
+      <!-- HEADER -->
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-base shadow-sm">
+            <i class="fa-regular fa-calendar-check"></i>
+          </div>
+          <h1 class="text-xl sm:text-2xl font-black text-slate-800 tracking-tight">Lịch chu kỳ</h1>
+        </div>
+        
+        <div class="flex items-center gap-2">
+          <button onclick="openSettingsModal()" title="Cài đặt thông số chu kỳ" class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-rose-100 text-slate-600 hover:text-rose-600 flex items-center justify-center text-sm transition-all">
+            <i class="fa-regular fa-clipboard"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- BANNER GHI NHẬN NGÀY TỚI KINH NGUYỆT THÁNG (MỖI THÁNG CÓ 1 LẦN DỰA TRÊN THÁNG ĐANG XEM) -->
+      <div class="sub-card p-3.5 sm:p-4 bg-gradient-to-r from-rose-50/90 to-pink-50/90 border border-rose-200">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-rose-500 text-white flex items-center justify-center text-lg shrink-0 shadow-md">
+              <i class="fa-solid fa-droplet"></i>
+            </div>
+            <div>
+              <h3 class="text-xs sm:text-sm font-black text-slate-800">
+                Khai Báo Kinh Nguyệt <span id="logMonthText" class="text-rose-600">Tháng 10/2026</span>
+              </h3>
+              <p id="logStatusSubtext" class="text-[10px] font-bold text-slate-500 mt-0.5">Mỗi tháng chỉ được chọn ngày kinh 1 lần duy nhất</p>
+            </div>
+          </div>
+
+          <!-- NÚT HOẶC NHÃN KHÓA NẾU ĐÃ GHI NHẬN THÁNG NÀY -->
+          <div id="logActionContainer" class="w-full sm:w-auto">
+            <button onclick="openLogPeriodModal()" id="btnLogPeriod" class="w-full sm:w-auto px-4 py-2 bg-rose-600 hover:bg-rose-700 active:scale-95 text-white font-black text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5">
+              <i class="fa-solid fa-plus-circle"></i> Chọn Ngày Kinh Tháng Này
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BỐ CỤC LƯỚI: ĐIỆN THOẠI 1 CỘT - MÁY TÍNH 2 CỘT RỘNG RÃI -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-7 items-start">
+        
+        <!-- CỘT BÊN TRÁI: ĐIỀU HƯỚNG & LỊCH THÁNG -->
+        <div class="lg:col-span-7 space-y-4">
+          <!-- ĐIỀU HƯỚNG THÁNG / NĂM -->
+          <div class="flex items-center justify-between px-2">
+            <button onclick="changeMonth(-1)" class="w-8 h-8 rounded-full text-rose-500 hover:bg-rose-50 flex items-center justify-center text-base font-black transition-all">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            
+            <h2 id="calendarMonthYearTitle" class="text-base sm:text-lg font-black text-slate-800 tracking-wide">
+              Tháng 10 2026
+            </h2>
+
+            <button onclick="changeMonth(1)" class="w-8 h-8 rounded-full text-rose-500 hover:bg-rose-50 flex items-center justify-center text-base font-black transition-all">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+
+          <!-- HÀNG THỨ TRONG TUẦN -->
+          <div class="grid grid-cols-7 gap-1 text-center text-xs font-black text-slate-400 py-1">
+            <div>T2</div><div>T3</div><div>T4</div><div>T5</div><div>T6</div><div>T7</div><div>CN</div>
+          </div>
+
+          <!-- LƯỚI NGÀY LỊCH CHU KỲ -->
+          <div id="calendarGrid" class="grid grid-cols-7 gap-y-2.5 gap-x-1"></div>
+
+          <!-- BẢNG CHÚ THÍCH MÀU SẮC -->
+          <div class="bg-slate-50/90 p-3.5 rounded-2xl border border-slate-100 grid grid-cols-2 sm:grid-cols-3 gap-2 text-[11px] font-extrabold text-slate-600">
+            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-rose-200 border border-rose-400 shrink-0"></span> Kinh nguyệt</div>
+            <div class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-md bg-[#ff4b5c] shrink-0 shadow-sm"></span> Hết kinh (Mốc 6 ngày)</div>
+            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-teal-400 shrink-0"></span> Nang trứng</div>
+            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-purple-500 shrink-0"></span> Rụng trứng</div>
+            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-sky-400 shrink-0"></span> Hoàng thể</div>
+            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-amber-400 shrink-0"></span> Trước kinh</div>
+          </div>
+        </div>
+
+        <!-- CỘT BÊN PHẢI: CHI TIẾT NGÀY ĐƯỢC CHỌN & LỜI KHUYÊN -->
+        <div class="lg:col-span-5 space-y-4">
+          
+          <!-- KHUNG CHI TIẾT NGÀY ĐƯỢC CHỌN -->
+          <div class="sub-card p-4 sm:p-5 space-y-4">
+            
+            <!-- TIÊU ĐỀ NGÀY & TRẠNG THÁI -->
+            <div class="flex items-start gap-3">
+              <div id="detailPhaseIcon" class="text-3xl text-rose-500 mt-1 shrink-0">
+                <i class="fa-solid fa-droplet"></i>
+              </div>
+              <div>
+                <p id="detailFullDateText" class="text-xs font-bold text-slate-400">Thứ Hai, 19 Tháng 10 2026</p>
+                <h3 id="detailPhaseTitle" class="text-xl sm:text-2xl font-black text-slate-800 leading-tight">Kinh nguyệt</h3>
+              </div>
+            </div>
+
+            <!-- THỐNG KÊ 4 Ô TÌNH CẢM & THỜI TIẾT -->
+            <div class="grid grid-cols-2 gap-2.5 pt-1">
+              <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex items-center gap-2.5">
+                <i class="fa-regular fa-calendar text-slate-700 text-lg"></i>
+                <div>
+                  <p class="text-[9px] font-black text-slate-400 uppercase leading-none">NGÀY CHU KỲ</p>
+                  <p id="statCycleDay" class="text-xs font-black text-slate-800 mt-1">Ngày 5/34</p>
+                </div>
+              </div>
+
+              <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex items-center gap-2.5">
+                <i id="statWeatherIcon" class="fa-solid fa-cloud-showers-heavy text-sky-500 text-lg"></i>
+                <div>
+                  <p class="text-[9px] font-black text-slate-400 uppercase leading-none">THỜI TIẾT</p>
+                  <p id="statWeather" class="text-xs font-black text-slate-800 mt-1">MƯA RÀO</p>
+                </div>
+              </div>
+
+              <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex items-center gap-2.5">
+                <i id="statTempIcon" class="fa-solid fa-temperature-three-quarters text-rose-500 text-lg"></i>
+                <div>
+                  <p class="text-[9px] font-black text-slate-400 uppercase leading-none">NHIỆT ĐỘ</p>
+                  <p id="statTemp" class="text-xs font-black text-slate-800 mt-1">16°C tình cảm</p>
+                </div>
+              </div>
+
+              <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex items-center gap-2.5">
+                <i id="statStatusIcon" class="fa-solid fa-triangle-exclamation text-amber-500 text-lg"></i>
+                <div>
+                  <p class="text-[9px] font-black text-slate-400 uppercase leading-none">TRẠNG THÁI</p>
+                  <p id="statStatus" class="text-xs font-black text-slate-800 mt-1">Cần chăm sóc</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- LỜI KHUYÊN DÀNH CHO BẠN TRAI -->
+            <div class="bg-amber-50/60 p-3 rounded-2xl border border-amber-100 flex items-start gap-2.5">
+              <i class="fa-regular fa-lightbulb text-amber-500 text-base mt-0.5 shrink-0"></i>
+              <div>
+                <p class="text-[10px] font-black text-amber-600 uppercase">LỜI KHUYÊN BẠN TRAI</p>
+                <p id="adviceText" class="text-xs font-extrabold text-slate-700 mt-0.5 leading-relaxed">
+                  Nếu cô ấy ngồi im lặng, hãy im lặng cùng cô ấy. Sự có mặt quan trọng hơn lời nói trong giai đoạn này.
+                </p>
+              </div>
+            </div>
+
+            <!-- GIẢI THÍCH KIẾN THỨC BỆNH LÝ / KINH NGUYỆT -->
+            <div class="bg-rose-50/50 p-3.5 rounded-2xl border border-rose-100">
+              <p class="text-xs font-black text-rose-600 flex items-center gap-1.5 mb-1">
+                <i class="fa-solid fa-notes-medical"></i> <span id="knowledgeTitle">Kinh nguyệt là gì?</span>
+              </p>
+              <p id="knowledgeDesc" class="text-xs font-bold text-slate-600 leading-relaxed">
+                Niêm mạc tử cung bong ra và đào thải ra ngoài. Cô ấy bị đau bụng, mệt mỏi, và mất máu. Đây là lúc cần được chăm sóc nhất.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- KHUNG NGÀY QUAN TRỌNG DƯỚI ĐÁY -->
+          <div class="sub-card p-4 space-y-3">
+            <h4 class="text-xs font-black text-slate-400 uppercase">NGÀY QUAN TRỌNG DỰ BÁO</h4>
+            
+            <div class="flex items-center justify-between p-2 rounded-xl bg-rose-50/60 border border-rose-100">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-sm shrink-0">
+                  <i class="fa-solid fa-droplet"></i>
+                </div>
+                <div>
+                  <p class="text-[10px] font-bold text-slate-400 uppercase">Ngày kinh tiếp theo</p>
+                  <p id="nextPeriodFullText" class="text-xs sm:text-sm font-black text-slate-800">ngày 18 tháng 11, 2026</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between p-2 rounded-xl bg-pink-50/60 border border-pink-100">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-[#ff4b5c] text-white flex items-center justify-center text-sm shrink-0 shadow-sm">
+                  <i class="fa-solid fa-flag-checkered"></i>
+                </div>
+                <div>
+                  <p class="text-[10px] font-bold text-slate-400 uppercase">Dự đoán kết thúc (Mốc 6 ngày)</p>
+                  <p id="endPeriodFullText" class="text-xs sm:text-sm font-black text-rose-600">ngày 20 tháng 10, 2026</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- MODAL ĐÁNH DẤU NGÀY KINH NGUYỆT THÁNG (KHÓA 1 LẦN DUY NHẤT) -->
+  <div id="logPeriodModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center p-3 opacity-0 pointer-events-none transition-opacity duration-200">
+    <div class="bg-white rounded-3xl p-5 w-full max-w-sm shadow-2xl border border-slate-100 transform scale-95 transition-transform duration-200" id="logPeriodModalBox">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-sm sm:text-base font-extrabold text-slate-800 flex items-center gap-1.5">
+          <i class="fa-solid fa-droplet text-rose-500"></i>
+          Đánh Dấu Kinh Nguyệt <span id="modalMonthTitle" class="text-rose-600">10/2026</span>
+        </h3>
+        <button onclick="closeLogPeriodModal()" class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-xs"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="space-y-3 text-xs font-bold">
+        <div class="bg-rose-50 p-3 rounded-2xl border border-rose-100 text-[11px] text-slate-600 leading-relaxed">
+          <p class="font-black text-rose-600 uppercase mb-0.5">⚠️ LƯU Ý QUAN TRỌNG:</p>
+          Mỗi tháng hệ thống chỉ cho phép ghi nhận ngày kinh <span class="text-rose-700 font-black">đúng 1 lần duy nhất</span> và sẽ tự động khóa để đảm bảo dữ liệu theo dõi chuẩn xác!
+        </div>
+
+        <div>
+          <label class="block mb-1 text-slate-700 uppercase text-[10px] font-black">Chọn ngày bắt đầu có kinh</label>
+          <input type="date" id="inputMonthLogDate" class="w-full p-2.5 bg-slate-50 border rounded-xl font-extrabold text-slate-800 outline-none focus:ring-2 focus:ring-rose-400">
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-4">
+        <button onclick="closeLogPeriodModal()" class="px-3.5 py-2 rounded-xl bg-slate-100 font-bold text-slate-600 text-xs">Hủy</button>
+        <button onclick="confirmMonthLogPeriod()" class="px-4 py-2 rounded-xl bg-rose-600 text-white font-bold shadow-md hover:bg-rose-700 text-xs">Xác Nhận & Khóa</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CÀI ĐẶT THÔNG SỐ CHU KỲ -->
+  <div id="settingsModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center p-3 opacity-0 pointer-events-none transition-opacity">
+    <div class="bg-white rounded-3xl p-5 w-full max-w-sm shadow-2xl border border-slate-100">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-base font-extrabold text-slate-800"><i class="fa-regular fa-clipboard text-rose-500 mr-1.5"></i>Cấu Hình Chu Kỳ</h3>
+        <button onclick="closeSettingsModal()" class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-xs"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="space-y-3 text-xs font-bold">
+        <div>
+          <label class="block mb-1 text-slate-600">Ngày bắt đầu kỳ kinh gần nhất</label>
+          <input type="date" id="inputLastPeriod" class="w-full p-2.5 bg-slate-50 border rounded-xl font-bold text-slate-800 outline-none focus:ring-2 focus:ring-rose-400">
+        </div>
+
+        <div>
+          <label class="block mb-1 text-slate-600">Độ dài chu kỳ (ngày, VD: 34)</label>
+          <input type="number" id="inputCycleLength" value="34" min="20" max="45" class="w-full p-2.5 bg-slate-50 border rounded-xl font-bold text-slate-800 outline-none focus:ring-2 focus:ring-rose-400">
+        </div>
+
+        <div>
+          <label class="block mb-1 text-slate-600">Số ngày hành kinh (mặc định mốc 6 ngày)</label>
+          <input type="number" id="inputPeriodLength" value="6" min="1" max="10" class="w-full p-2.5 bg-slate-50 border rounded-xl font-bold text-slate-800 outline-none focus:ring-2 focus:ring-rose-400">
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-4">
+        <button onclick="closeSettingsModal()" class="px-3.5 py-2 rounded-xl bg-slate-100 font-bold text-slate-600 text-xs">Hủy</button>
+        <button onclick="saveSettings()" class="px-4 py-2 rounded-xl bg-rose-600 text-white font-bold shadow-md hover:bg-rose-700 text-xs">Lưu Cấu Hình</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    const firebaseConfig = { databaseURL: "https://lichcuatui-default-rtdb.asia-southeast1.firebasedatabase.app/" };
+    let db = null;
+    try { db = getDatabase(initializeApp(firebaseConfig)); } catch(e){}
+
+    let currentUser = JSON.parse(localStorage.getItem('COUPLE_CALENDAR_USER'));
+    if(!currentUser) window.location.href = "index.html";
+
+    let periodConfig = {
+      lastPeriodIso: '2026-10-15',
+      cycleLength: 34,
+      periodLength: 6
+    };
+
+    let periodLogs = {}; // Lưu danh sách ngày kinh từng tháng: { "2026-10": "2026-10-15" }
+
+    window.currentDisplayYear = 2026;
+    window.currentDisplayMonth = 10;
+    window.selectedDateStr = '2026-10-19';
+
+    const weekdayNames = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
+
+    window.showToast = function(title, message, type = 'success') {
+      const toast = document.getElementById('customToast');
+      document.getElementById('toastTitle').innerText = title;
+      document.getElementById('toastMessage').innerText = message;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      toast.classList.add('toast-enter');
+      setTimeout(() => { hideToast(); }, 3200);
+    };
+
+    window.hideToast = function() {
+      const toast = document.getElementById('customToast');
+      toast.classList.add('opacity-0', 'pointer-events-none');
+      toast.classList.remove('toast-enter');
+    };
+
+    // TẢI DỮ LIỆU TỪ FIREBASE
+    function loadPeriodData() {
+      if(!db || !currentUser.roomCode) { renderCalendar(); updateDayDetail(window.selectedDateStr); return; }
+
+      // 1. Tải thông số chu kỳ
+      onValue(ref(db, `rooms/${currentUser.roomCode}/period_data`), (snapshot) => {
+        const data = snapshot.val();
+        if(data) {
+          periodConfig.lastPeriodIso = data.lastPeriodIso || '2026-10-15';
+          periodConfig.cycleLength = parseInt(data.cycleLength) || 34;
+          periodConfig.periodLength = parseInt(data.periodLength) || 6;
+        }
+        renderCalendar();
+        updateDayDetail(window.selectedDateStr);
+      });
+
+      // 2. Tải nhật ký ghi nhận theo tháng
+      onValue(ref(db, `rooms/${currentUser.roomCode}/period_logs`), (snapshot) => {
+        periodLogs = snapshot.val() || {};
+        updateMonthLogBanner();
+        renderCalendar();
+      });
+    }
+
+    function getMonthKey(year, month) {
+      const mStr = month < 10 ? `0${month}` : month;
+      return `${year}-${mStr}`;
+    }
+
+    // CẬP NHẬT BANNER KHÓA / CHỌN NGÀY THEO THÁNG
+    function updateMonthLogBanner() {
+      const monthKey = getMonthKey(window.currentDisplayYear, window.currentDisplayMonth);
+      document.getElementById('logMonthText').innerText = `Tháng ${window.currentDisplayMonth}/${window.currentDisplayYear}`;
+      
+      const loggedDateIso = periodLogs[monthKey];
+      const actionContainer = document.getElementById('logActionContainer');
+
+      if (loggedDateIso) {
+        const parts = loggedDateIso.split('-');
+        const formatted = `${parts[2]}/${parts[1]}/${parts[0]}`;
+        actionContainer.innerHTML = `
+          <div class="bg-rose-100 border border-rose-300 text-rose-800 font-extrabold px-3.5 py-1.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-sm">
+            <i class="fa-solid fa-lock text-rose-600"></i> Đã ghi nhận: ${formatted} (Đã khóa)
+          </div>
+        `;
+      } else {
+        actionContainer.innerHTML = `
+          <button onclick="openLogPeriodModal()" id="btnLogPeriod" class="w-full sm:w-auto px-4 py-2 bg-rose-600 hover:bg-rose-700 active:scale-95 text-white font-black text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-plus-circle"></i> Chọn Ngày Kinh Tháng Này
+          </button>
+        `;
+      }
+    }
+
+    // MỞ / ĐÓNG MODAL CHỌN NGÀY KINH THÁNG NÀY
+    window.openLogPeriodModal = function() {
+      const monthKey = getMonthKey(window.currentDisplayYear, window.currentDisplayMonth);
+      if (periodLogs[monthKey]) {
+        showToast("Đã khóa!", `Tháng ${window.currentDisplayMonth}/${window.currentDisplayYear} bạn đã chọn ngày kinh rồi!`, "warning");
+        return;
+      }
+
+      document.getElementById('modalMonthTitle').innerText = `${window.currentDisplayMonth}/${window.currentDisplayYear}`;
+      
+      // Đặt ngày mặc định trong input là ngày 15 tháng đó
+      const mStr = window.currentDisplayMonth < 10 ? `0${window.currentDisplayMonth}` : window.currentDisplayMonth;
+      document.getElementById('inputMonthLogDate').value = `${window.currentDisplayYear}-${mStr}-15`;
+
+      document.getElementById('logPeriodModal').classList.remove('opacity-0', 'pointer-events-none');
+      document.getElementById('logPeriodModalBox').classList.remove('scale-95');
+    };
+
+    window.closeLogPeriodModal = function() {
+      document.getElementById('logPeriodModal').classList.add('opacity-0', 'pointer-events-none');
+      document.getElementById('logPeriodModalBox').classList.add('scale-95');
+    };
+
+    // XÁC NHẬN CHỌN NGÀY KINH & KHÓA VĨNH VIỄN CỦA THÁNG
+    window.confirmMonthLogPeriod = function() {
+      const selectedIso = document.getElementById('inputMonthLogDate').value;
+      if (!selectedIso) {
+        showToast("Thiếu ngày", "Vui lòng chọn ngày có kinh nguyệt!", "warning");
+        return;
+      }
+
+      const monthKey = getMonthKey(window.currentDisplayYear, window.currentDisplayMonth);
+      
+      // Kiểm tra lần 2 nếu đã chọn
+      if (periodLogs[monthKey]) {
+        showToast("Đã ghi nhận", "Tháng này đã được chọn ngày kinh trước đó!", "warning");
+        closeLogPeriodModal();
+        return;
+      }
+
+      // 1. Lưu log tháng
+      periodLogs[monthKey] = selectedIso;
+      
+      // 2. Cập nhật ngày kinh gần nhất cho cấu hình chung
+      periodConfig.lastPeriodIso = selectedIso;
+
+      if (db && currentUser.roomCode) {
+        set(ref(db, `rooms/${currentUser.roomCode}/period_logs/${monthKey}`), selectedIso);
+        set(ref(db, `rooms/${currentUser.roomCode}/period_data`), periodConfig);
+      }
+
+      closeLogPeriodModal();
+      showToast("Đã ghi nhận & Khóa!", `Đã lưu ngày kinh cho Tháng ${window.currentDisplayMonth}/${window.currentDisplayYear}! 🌸`, "success");
+      
+      updateMonthLogBanner();
+      renderCalendar();
+      updateDayDetail(selectedIso);
+    };
+
+    // ĐIỀU HƯỚNG THÁNG
+    window.changeMonth = function(offset) {
+      window.currentDisplayMonth += offset;
+      if (window.currentDisplayMonth > 12) { window.currentDisplayMonth = 1; window.currentDisplayYear++; }
+      if (window.currentDisplayMonth < 1) { window.currentDisplayMonth = 12; window.currentDisplayYear--; }
+      updateMonthLogBanner();
+      renderCalendar();
+    };
+
+    // TÍNH PHAI DỰA TRÊN NGÀY BẤM VÀO
+    function getPhaseForDate(dateObj) {
+      const lastStart = new Date(periodConfig.lastPeriodIso);
+      lastStart.setHours(0, 0, 0, 0);
+
+      const targetDate = new Date(dateObj);
+      targetDate.setHours(0, 0, 0, 0);
+
+      const diffTime = targetDate - lastStart;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+      let dayInCycle = (diffDays % periodConfig.cycleLength) + 1;
+      if (dayInCycle <= 0) dayInCycle += periodConfig.cycleLength;
+
+      const pLength = periodConfig.periodLength;
+      const cLength = periodConfig.cycleLength;
+      const ovulationDay = cLength - 14;
+
+      if (diffDays < 0 && Math.abs(diffDays) > 30) return { phaseKey: 'normal', dayInCycle: 1 };
+
+      if (dayInCycle >= 1 && dayInCycle <= pLength) {
+        return { phaseKey: 'kinh-nguyet', dayInCycle };
+      } else if (dayInCycle > pLength && dayInCycle < (ovulationDay - 2)) {
+        return { phaseKey: 'nang-trung', dayInCycle };
+      } else if (dayInCycle >= (ovulationDay - 2) && dayInCycle <= (ovulationDay + 1)) {
+        return { phaseKey: 'rung-trung', dayInCycle };
+      } else if (dayInCycle > (ovulationDay + 1) && dayInCycle <= (cLength - 6)) {
+        return { phaseKey: 'hoang-the', dayInCycle };
+      } else if (dayInCycle > (cLength - 6) && dayInCycle <= cLength) {
+        return { phaseKey: 'truoc-kinh', dayInCycle };
+      }
+      return { phaseKey: 'normal', dayInCycle };
+    }
+
+    function getEndPeriodIsoDate() {
+      const lastStart = new Date(periodConfig.lastPeriodIso);
+      const pLen = parseInt(periodConfig.periodLength) || 6;
+      const endDate = new Date(lastStart);
+      endDate.setDate(endDate.getDate() + pLen - 1);
+      
+      const y = endDate.getFullYear();
+      const m = (endDate.getMonth() + 1) < 10 ? `0${endDate.getMonth() + 1}` : `${endDate.getMonth() + 1}`;
+      const d = endDate.getDate() < 10 ? `0${endDate.getDate()}` : `${endDate.getDate()}`;
+      return `${y}-${m}-${d}`;
+    }
+
+    // RENDER LƯỚI LỊCH
+    function renderCalendar() {
+      document.getElementById('calendarMonthYearTitle').innerText = `Tháng ${window.currentDisplayMonth} ${window.currentDisplayYear}`;
+      const grid = document.getElementById('calendarGrid');
+      grid.innerHTML = '';
+
+      const firstDayObj = new Date(window.currentDisplayYear, window.currentDisplayMonth - 1, 1);
+      let startDayOfWeek = firstDayObj.getDay() - 1;
+      if (startDayOfWeek === -1) startDayOfWeek = 6;
+
+      const totalDaysInMonth = new Date(window.currentDisplayYear, window.currentDisplayMonth, 0).getDate();
+      const endPeriodIso = getEndPeriodIsoDate();
+
+      for (let i = 0; i < startDayOfWeek; i++) {
+        grid.appendChild(document.createElement('div'));
+      }
+
+      for (let day = 1; day <= totalDaysInMonth; day++) {
+        const mStr = window.currentDisplayMonth < 10 ? `0${window.currentDisplayMonth}` : window.currentDisplayMonth;
+        const dStr = day < 10 ? `0${day}` : day;
+        const dateIso = `${window.currentDisplayYear}-${mStr}-${dStr}`;
+
+        const dateObj = new Date(window.currentDisplayYear, window.currentDisplayMonth - 1, day);
+        const { phaseKey } = getPhaseForDate(dateObj);
+
+        const pill = document.createElement('div');
+        let classes = `day-pill phase-${phaseKey}`;
+
+        if (dateIso === endPeriodIso) {
+          classes += ' day-end-period';
+          pill.title = 'Dự đoán ngày kết thúc kinh (Mốc 6 ngày)';
+        }
+
+        if (dateIso === window.selectedDateStr) {
+          classes += ' day-selected';
+        }
+
+        pill.className = classes;
+        
+        if (dateIso === periodConfig.lastPeriodIso) {
+          pill.innerHTML = `${day} <span class="absolute -top-1 -right-0.5 text-[9px] text-rose-600"><i class="fa-solid fa-droplet"></i></span>`;
+        } else {
+          pill.innerText = day;
+        }
+
+        pill.onclick = () => {
+          window.selectedDateStr = dateIso;
+          renderCalendar();
+          updateDayDetail(dateIso);
+        };
+
+        grid.appendChild(pill);
+      }
+
+      const lastStart = new Date(periodConfig.lastPeriodIso);
+      const nextPeriodDate = new Date(lastStart);
+      nextPeriodDate.setDate(nextPeriodDate.getDate() + periodConfig.cycleLength);
+
+      document.getElementById('nextPeriodFullText').innerText = `ngày ${nextPeriodDate.getDate()} tháng ${nextPeriodDate.getMonth() + 1}, ${nextPeriodDate.getFullYear()}`;
+
+      const endDateObj = new Date(endPeriodIso);
+      document.getElementById('endPeriodFullText').innerText = `ngày ${endDateObj.getDate()} tháng ${endDateObj.getMonth() + 1}, ${endDateObj.getFullYear()}`;
+    }
+
+    // CẬP NHẬT CHI TIẾT THEO NGÀY BẤM VÀO
+    function updateDayDetail(dateIso) {
+      const [y, m, d] = dateIso.split('-');
+      const dateObj = new Date(y, parseInt(m) - 1, parseInt(d));
+      
+      const dayOfWeekName = weekdayNames[dateObj.getDay()];
+      document.getElementById('detailFullDateText').innerText = `${dayOfWeekName}, ${parseInt(d)} Tháng ${parseInt(m)} ${y}`;
+
+      const { phaseKey, dayInCycle } = getPhaseForDate(dateObj);
+      document.getElementById('statCycleDay').innerText = `Ngày ${dayInCycle}/${periodConfig.cycleLength}`;
+
+      const phaseDataMap = {
+        'kinh-nguyet': {
+          title: 'Kinh nguyệt',
+          icon: '<i class="fa-solid fa-droplet text-rose-500"></i>',
+          weather: 'MƯA RÀO',
+          weatherIcon: 'fa-solid fa-cloud-showers-heavy text-sky-500',
+          temp: '16°C tình cảm',
+          status: 'Cần chăm sóc',
+          statusIcon: 'fa-solid fa-triangle-exclamation text-amber-500',
+          advice: 'Nếu cô ấy ngồi im lặng, hãy im lặng cùng cô ấy. Sự có mặt quan trọng hơn lời nói trong giai đoạn này.',
+          kTitle: 'Kinh nguyệt là gì?',
+          kDesc: 'Niêm mạc tử cung bong ra và đào thải ra ngoài. Cô ấy bị đau bụng, mệt mỏi, và mất máu. Đây là lúc cần được chăm sóc nhất.'
+        },
+        'nang-trung': {
+          title: 'Nang trứng phát triển',
+          icon: '<i class="fa-solid fa-seedling text-teal-500"></i>',
+          weather: 'NẮNG NHẸ',
+          weatherIcon: 'fa-solid fa-cloud-sun text-amber-400',
+          temp: '28°C vui vẻ',
+          status: 'Năng lượng dồi dào',
+          statusIcon: 'fa-solid fa-face-smile-beam text-emerald-500',
+          advice: 'Cô ấy đang tràn đầy năng lượng và vui tươi. Hãy cùng cô ấy tham gia các hoạt động ngoài trời!',
+          kTitle: 'Giai đoạn Nang trứng là gì?',
+          kDesc: 'Hormone Estrogen gia tăng giúp cơ thể phục hồi, tinh thần thoải mái, làn da hồng hào tươi tắn.'
+        },
+        'rung-trung': {
+          title: 'Rụng trứng',
+          icon: '<i class="fa-solid fa-egg text-purple-500"></i>',
+          weather: 'NẮNG VÀNG',
+          weatherIcon: 'fa-solid fa-sun text-amber-500',
+          temp: '35°C quyến rũ',
+          status: 'Quyến rũ & Ngọt ngào',
+          statusIcon: 'fa-solid fa-heart text-rose-500',
+          advice: 'Giai đoạn ngọt ngào nhất chu kỳ. Một buổi hẹn hò lãng mạn cùng lời khen chân thành sẽ khiến cô ấy rất hạnh phúc.',
+          kTitle: 'Ngày Rụng trứng là gì?',
+          kDesc: 'Trứng được giải phóng khỏi buồng trứng. Đây là thời điểm khả năng thụ thai đạt đỉnh cao nhất.'
+        },
+        'hoang-the': {
+          title: 'Hoàng thể',
+          icon: '<i class="fa-solid fa-moon text-sky-500"></i>',
+          weather: 'MÂY ÂM U',
+          weatherIcon: 'fa-solid fa-cloud text-slate-400',
+          temp: '22°C trầm lắng',
+          status: 'Thích yên tĩnh',
+          statusIcon: 'fa-solid fa-mug-hot text-amber-600',
+          advice: 'Cô ấy có thể hơi chững lại và thích không gian riêng. Hãy lắng nghe và ôm cô ấy nhẹ nhàng.',
+          kTitle: 'Giai đoạn Hoàng thể là gì?',
+          kDesc: 'Nồng độ Progesterone tăng cao để chuẩn bị cho chu kỳ mới, cơ thể hơi tích nước và thèm ăn nhẹ.'
+        },
+        'truoc-kinh': {
+          title: 'Trước kinh (PMS)',
+          icon: '<i class="fa-solid fa-bolt text-amber-500"></i>',
+          weather: 'GIÓ MÙA / DÔNG',
+          weatherIcon: 'fa-solid fa-cloud-bolt text-indigo-500',
+          temp: '18°C nhạy cảm',
+          status: 'Dễ nhạy cảm (PMS)',
+          statusIcon: 'fa-solid fa-circle-exclamation text-rose-500',
+          advice: 'Hãy chuẩn bị ít bánh ngọt, nước ấm và sự nhẫn nại. Đừng chấp nhặt nếu cô ấy hờn dỗi nhé!',
+          kTitle: 'Hội chứng PMS là gì?',
+          kDesc: 'Sự sụt giảm hormone đột ngột gây đau lưng, chướng bụng và cảm xúc thay đổi thất thường.'
+        },
+        'normal': {
+          title: 'Bình thường',
+          icon: '<i class="fa-solid fa-circle-check text-slate-400"></i>',
+          weather: 'THỜI TIẾT ĐẸP',
+          weatherIcon: 'fa-solid fa-sun text-amber-400',
+          temp: '25°C hài hòa',
+          status: 'Ổn định',
+          statusIcon: 'fa-solid fa-face-smile text-emerald-500',
+          advice: 'Trạng thái sức khỏe bình thường, hãy duy trì thói quen sinh hoạt lành mạnh.',
+          kTitle: 'Giai đoạn ổn định',
+          kDesc: 'Sức khỏe và tâm lý ở mức cân bằng tốt.'
+        }
+      };
+
+      const data = phaseDataMap[phaseKey] || phaseDataMap['normal'];
+
+      document.getElementById('detailPhaseTitle').innerText = data.title;
+      document.getElementById('detailPhaseIcon').innerHTML = data.icon;
+      document.getElementById('statWeather').innerText = data.weather;
+      document.getElementById('statWeatherIcon').className = `${data.weatherIcon} text-lg`;
+      document.getElementById('statTemp').innerText = data.temp;
+      document.getElementById('statStatus').innerText = data.status;
+      document.getElementById('statStatusIcon').className = `${data.statusIcon} text-lg`;
+      document.getElementById('adviceText').innerText = data.advice;
+      document.getElementById('knowledgeTitle').innerText = data.kTitle;
+      document.getElementById('knowledgeDesc').innerText = data.kDesc;
+    }
+
+    // MODAL CÀI ĐẶT
+    window.openSettingsModal = function() {
+      document.getElementById('inputLastPeriod').value = periodConfig.lastPeriodIso;
+      document.getElementById('inputCycleLength').value = periodConfig.cycleLength;
+      document.getElementById('inputPeriodLength').value = periodConfig.periodLength;
+      document.getElementById('settingsModal').classList.remove('opacity-0', 'pointer-events-none');
+    };
+
+    window.closeSettingsModal = function() {
+      document.getElementById('settingsModal').classList.add('opacity-0', 'pointer-events-none');
+    };
+
+    window.saveSettings = function() {
+      const lastIso = document.getElementById('inputLastPeriod').value;
+      const cLen = parseInt(document.getElementById('inputCycleLength').value) || 34;
+      const pLen = parseInt(document.getElementById('inputPeriodLength').value) || 6;
+
+      if (!lastIso) {
+        showToast("Thiếu thông tin", "Vui lòng chọn ngày bắt đầu kỳ kinh!");
+        return;
+      }
+
+      periodConfig.lastPeriodIso = lastIso;
+      periodConfig.cycleLength = cLen;
+      periodConfig.periodLength = pLen;
+
+      if (db && currentUser.roomCode) {
+        set(ref(db, `rooms/${currentUser.roomCode}/period_data`), periodConfig);
+      }
+
+      closeSettingsModal();
+      showToast("Thành công", "Đã lưu cấu hình chu kỳ mới!");
+      renderCalendar();
+      updateDayDetail(window.selectedDateStr);
+    };
+
+    loadPeriodData();
+  </script>
+</body>
+</html>

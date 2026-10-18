@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Lịch - LoveMore</title>
+  <link rel="icon" type="image/jpeg" href="https://duavamew.asia/photo/logo2.png">
+  <!-- THẺ PREVIEW LINK (OPEN GRAPH CHO FACEBOOK/MESSENGER) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Không Gian Chung Cặp Đôi ♡౨ৎ☆">
+  <meta property="og:description" content="Không gian chung cho cặp đôi và ghi chú ngọt ngào dành riêng cho hai chúng mình.">
+  <meta property="og:image" content="https://duavamew.asia/photo/banner.png">
+  <meta property="og:image:secure_url" content="https://duavamew.asia/photo/banner.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://duavamew.asia/">
+  <meta property="fb:app_id" content="966242223397117">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, #f7a8ca 0%, #f7c5e6 40%, #fad0c4 70%, #ffd1ff 100%);
+      background-attachment: fixed;
+      color: #334155;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* GLASSMORPHISM NAVIGATION */
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1.5px solid rgba(255, 255, 255, 0.7);
+      border-radius: 20px;
+    }
+
+    /* GLASSMORPHISM HEADER PILL */
+    .glass-header-pill {
+      background: rgba(221, 132, 175, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1.5px solid rgba(255, 255, 255, 0.5);
+      border-radius: 24px;
+    }
+
+    /* GLASSMORPHISM BANNER PILL */
+    .glass-banner-pill {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(255, 255, 255, 0.5);
+      border-radius: 20px;
+    }
+
+    /* CARD Ô NGÀY - TỐI ƯU CẢ MOBILE & DESKTOP */
+    .glass-card-top {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(247, 197, 230, 0.65) 100%);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 6px 2px 6px 2px;
+      text-align: center;
+      position: relative;
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 4px 12px rgba(224, 38, 128, 0.08);
+      transition: all 0.2s ease;
+    }
+    @media (min-width: 640px) {
+      .glass-card-top {
+        border-radius: 22px;
+        padding: 12px 6px 10px 6px;
+      }
+    }
+
+    .day-card:active .glass-card-top,
+    .day-card:hover .glass-card-top {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(224, 38, 128, 0.22);
+      background: rgba(255, 255, 255, 0.98);
+    }
+
+    /* ẨN SCROLLBAR NHƯNG VẪN CHO VUỐT */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="pb-10 pt-2 sm:pt-4">
+
+  <!-- THANH MENU GLASSMORPHISM DÙNG CHUNG -->
+  <nav class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 mb-3 sticky top-2 z-40">
+    <div class="glass-nav p-1.5 flex items-center justify-between gap-1 overflow-x-auto no-scrollbar shadow-lg shadow-pink-500/10">
+      <a href="lich.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white text-pink-600 font-black text-xs sm:text-sm shadow-sm shrink-0">
+        <i class="fa-solid fa-house"></i> <span>Lịch</span>
+      </a>
+      <a href="kyniem.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-slate-700 hover:bg-white/50 font-black text-xs sm:text-sm transition-all shrink-0">
+        <i class="fa-solid fa-cake-candles text-pink-500"></i> <span>Kỷ Niệm</span>
+      </a>
+      <a href="bimat.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-slate-700 hover:bg-white/50 font-black text-xs sm:text-sm transition-all shrink-0">
+        <i class="fa-solid fa-vault text-purple-500"></i> <span>Két Bí Mật</span>
+      </a>
+      <a href="kinhnguyet.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-slate-700 hover:bg-white/50 font-black text-xs sm:text-sm transition-all shrink-0">
+        <i class="fa-solid fa-droplet text-rose-500"></i> <span>Chu Kỳ</span>
+      </a>
+      <a href="broai.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-slate-700 hover:bg-white/50 font-black text-xs sm:text-sm transition-all shrink-0">
+        <i class="fa-solid fa-robot text-indigo-500"></i> <span>Bro AI</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- HEADER TÀI KHOẢN & BỘ LỌC THÁNG -->
+  <header class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 mb-3">
+    <div class="glass-header-pill p-2.5 sm:px-6 sm:py-3 flex flex-col sm:flex-row items-center justify-between gap-2.5">
+      
+      <!-- INFO USER -->
+      <div class="flex items-center justify-between w-full sm:w-auto gap-2">
+        <div class="flex items-center gap-2">
+          <img id="headerAvatar" src="https://duavamew.asia/photo/iu1.jpg" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border-2 border-white shadow-md shrink-0">
+          <div>
+            <h1 class="text-sm sm:text-lg font-black text-white leading-none">LỊCH CẶP ĐÔI ♡</h1>
+            <p class="text-[9px] font-bold text-pink-100 mt-0.5"><i class="fa-solid fa-wifi mr-1"></i> Realtime Sync</p>
+          </div>
+        </div>
+
+        <div class="bg-black/20 px-2.5 py-1 rounded-full flex items-center gap-2 border border-white/30 text-white text-[11px] font-black shrink-0">
+          <span id="currentDisplayUser">Boy</span>
+          <button onclick="openSettingsModal()"><i class="fa-solid fa-gear text-xs hover:text-pink-200"></i></button>
+          <button onclick="logout()"><i class="fa-solid fa-right-from-bracket text-xs text-rose-200 hover:text-rose-400"></i></button>
+        </div>
+      </div>
+
+      <!-- CHUYỂN TAB LỊCH CHUNG & LỊCH CÁ NHÂN -->
+      <div class="flex items-center gap-1 bg-black/20 p-1 rounded-full border border-white/30">
+        <button id="btnTabCommon" onclick="switchCalendarTab('common')" class="px-3 py-1 rounded-full text-xs font-black bg-white text-pink-600 shadow-sm transition-all">Lịch Chung ♡</button>
+        <button id="btnTabPersonal" onclick="switchCalendarTab('personal')" class="px-3 py-1 rounded-full text-xs font-black text-white hover:text-pink-100 transition-all">Lịch Riêng 👤</button>
+      </div>
+
+      <!-- NÚT CHỌN THÁNG -->
+      <div class="flex items-center gap-1.5 w-full sm:w-auto justify-between overflow-x-auto no-scrollbar py-0.5">
+        <div class="bg-black/20 p-1 rounded-full flex items-center gap-1 overflow-x-auto no-scrollbar border border-white/20" id="month-buttons-container"></div>
+        <select id="statusFilter" onchange="filterStatus()" class="bg-white/90 border border-white text-slate-800 text-[11px] font-bold rounded-full px-2 py-1 outline-none shrink-0 shadow-sm">
+          <option value="all">Tất Cả</option>
+          <option value="paid">Đã Xong</option>
+          <option value="unpaid">Chưa Xong</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CALENDAR -->
+  <main class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+    
+    <!-- BANNER THỐNG KÊ -->
+    <div class="glass-banner-pill p-2.5 sm:p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 mb-3">
+      <div class="flex flex-wrap items-center gap-1.5 justify-center sm:justify-start">
+        <div id="calendarModeBadge" class="bg-pink-600 text-white px-3 py-1 rounded-xl text-xs font-black shadow-sm">LỊCH CHUNG</div>
+        <div id="monthTitleBadge" class="bg-gradient-to-r from-pink-500/80 to-rose-400/80 text-white px-3 py-1 rounded-xl text-xs font-black shadow-sm">THÁNG 10 / 2026</div>
+        <div class="bg-pink-100/90 text-pink-700 border border-pink-300 px-2.5 py-1 rounded-xl text-[10px] sm:text-xs font-extrabold flex items-center gap-1 shadow-sm max-w-full truncate">
+          <i class="fa-solid fa-key shrink-0"></i> Mã Phòng: <span id="displayRoomCode" class="font-black truncate">Chưa có</span>
+        </div>
+      </div>
+      <div class="flex items-center justify-center gap-2 text-[10px] sm:text-xs">
+        <div class="bg-emerald-100/90 text-emerald-800 border border-emerald-300 px-2.5 py-1 rounded-full font-black flex items-center gap-1 shadow-sm">
+          <i class="fa-solid fa-circle-check text-emerald-600"></i> Xong: <span id="paidCount">0</span>
+        </div>
+        <div class="bg-rose-100/90 text-rose-800 border border-rose-300 px-2.5 py-1 rounded-full font-black flex items-center gap-1 shadow-sm">
+          <i class="fa-solid fa-circle-xmark text-rose-600"></i> Chưa: <span id="unpaidCount">0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CÁC THỨ TRONG TUẦN -->
+    <div class="grid grid-cols-7 gap-1 sm:gap-3 mb-1 text-center text-[10px] sm:text-xs font-black text-slate-700">
+      <div>T2</div><div>T3</div><div>T4</div><div>T5</div><div>T6</div><div class="text-blue-800">T7</div><div class="text-rose-800">CN</div>
+    </div>
+
+    <!-- LƯỚI LỊCH 7 CỘT CHUẨN CẢ DI ĐỘNG -->
+    <div id="calendarGrid" class="grid grid-cols-7 gap-1 sm:gap-3"></div>
+  </main>
+
+  <!-- POP-UP PHÓNG TO XEM CHI TIẾT KHI CLICK Ô NGÀY -->
+  <div id="viewModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center p-3 opacity-0 pointer-events-none transition-opacity duration-200">
+    <div class="bg-white/95 backdrop-blur-xl rounded-3xl p-5 sm:p-6 w-full max-w-sm shadow-2xl border border-white text-center transform scale-95 transition-transform duration-200" id="viewModalBox">
+      
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-xs font-black text-slate-400 uppercase tracking-widest" id="viewModalDate">NGÀY --/--</span>
+        <button onclick="closeViewModal()" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- CHỮ PHÓNG TO NỔI BẬT -->
+      <div class="my-3">
+        <p class="text-[10px] font-black text-pink-500 uppercase tracking-wider mb-1">HOẠT ĐỘNG CHÍNH</p>
+        <h2 id="viewActivityText" class="text-2xl sm:text-3xl font-black text-pink-600 drop-shadow-sm leading-tight break-words">CHƯA CÓ CHỮ TO</h2>
+      </div>
+
+      <!-- GHI CHÚ CHI TIẾT -->
+      <div class="bg-pink-50/80 p-3.5 rounded-2xl border border-pink-200 text-left mb-4">
+        <p class="text-[10px] font-black text-slate-400 uppercase mb-1">GHI CHÚ CHI TIẾT:</p>
+        <p id="viewDetailText" class="text-xs sm:text-sm font-bold text-slate-800 leading-relaxed whitespace-pre-line break-words">Không có ghi chú cho ngày này.</p>
+      </div>
+
+      <!-- TRẠNG THÁI & CÔNG TẮC GẠT TRONG POPUP -->
+      <div class="flex items-center justify-between bg-slate-50 p-3 rounded-2xl border border-slate-200 mb-4">
+        <span class="text-xs font-extrabold text-slate-700">Trạng thái hoàn thành:</span>
+        <label class="relative inline-flex items-center cursor-pointer">
+          <input type="checkbox" id="viewModalPaidSwitch" onchange="toggleStatusFromView()" class="sr-only peer">
+          <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
+        </label>
+      </div>
+
+      <div class="flex gap-2">
+        <button onclick="openEditFromView()" class="flex-1 py-2.5 bg-pink-600 hover:bg-pink-700 text-white font-black text-xs rounded-xl shadow-md">
+          <i class="fa-solid fa-pen mr-1"></i> Chỉnh Sửa
+        </button>
+        <button onclick="closeViewModal()" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL EDIT CHỈNH SỬA NGÀY -->
+  <div id="editModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center p-3 opacity-0 pointer-events-none transition-opacity">
+    <div class="bg-white/95 backdrop-blur-xl rounded-3xl p-5 w-full max-w-md shadow-2xl border border-white">
+      <div class="flex items-center justify-between mb-3">
+        <h3 id="modalTitle" class="text-xs sm:text-base font-extrabold text-slate-800">Chỉnh sửa ngày</h3>
+        <button onclick="closeModal()" class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-xs"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-black text-pink-600 uppercase mb-1">Hoạt động / Chữ to nổi bật (VD: ĐI XEM PHIM)</label>
+          <input type="text" id="modalActivity" placeholder="Nhập chữ to sẽ phóng to khi bấm xem..." class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-pink-400">
+        </div>
+        <div>
+          <label class="block font-black text-slate-600 uppercase mb-1">Ghi chú chi tiết</label>
+          <textarea id="modalText" rows="3" placeholder="Ghi chú nội dung chi tiết..." class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none"></textarea>
+        </div>
+
+        <!-- CÔNG TẮC GẠT ĐỐI CHIẾU CHUẨN THIẾT KẾ -->
+        <div class="flex items-center justify-between bg-slate-50 p-3 rounded-xl border border-slate-200">
+          <span class="font-extrabold text-slate-700">Đã hoàn thành:</span>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" id="modalPaidSwitch" class="sr-only peer">
+            <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
+          </label>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 mt-4">
+        <button onclick="closeModal()" class="px-3.5 py-2 rounded-xl bg-slate-100 font-bold text-slate-600">Hủy</button>
+        <button onclick="saveModalData()" class="px-4 py-2 rounded-xl bg-pink-600 text-white font-bold shadow-md hover:bg-pink-700">Lưu lại</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CÀI ĐẶT TÀI KHOẢN & MÃ PHÒNG -->
+  <div id="settingsModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center p-3 opacity-0 pointer-events-none transition-opacity">
+    <div class="bg-white/95 rounded-3xl p-5 w-full max-w-md shadow-2xl border border-white">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-xs sm:text-base font-extrabold text-slate-800"><i class="fa-solid fa-gear text-pink-600 mr-1"></i> Cài Đặt Cặp Đôi</h3>
+        <button onclick="closeSettingsModal()" class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-xs"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-black text-pink-600 uppercase mb-1">Tên hiển thị (Nickname)</label>
+          <input type="text" id="settingNickname" class="w-full p-2.5 bg-slate-50 border rounded-xl font-bold">
+        </div>
+        <div>
+          <label class="block font-black text-pink-600 uppercase mb-1">Vai trò</label>
+          <select id="settingRole" class="w-full p-2.5 bg-slate-50 border rounded-xl font-bold">
+            <option value="Boy">Boy (Anh)</option>
+            <option value="Girl">Girl (Em)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-black text-pink-600 uppercase mb-1">Mã Phòng Đồng Bộ (Chỉ được sửa 1 lần)</label>
+          <input type="text" id="settingRoomCode" placeholder="Nhập mã phòng đối phương..." class="w-full p-2.5 bg-slate-50 border rounded-xl font-bold">
+          <p id="roomCodeWarning" class="text-[10px] text-rose-500 font-bold mt-1">⚠️ Mỗi tài khoản chỉ được phép nhập/thay đổi Mã Phòng đúng 1 lần duy nhất!</p>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 mt-4">
+        <button onclick="closeSettingsModal()" class="px-3.5 py-2 rounded-xl bg-slate-100 font-bold text-slate-600">Hủy</button>
+        <button onclick="saveSettings()" class="px-4 py-2 rounded-xl bg-pink-600 text-white font-bold shadow-md hover:bg-pink-700">Lưu Cài Đặt</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    const firebaseConfig = { databaseURL: "https://lichcuatui-default-rtdb.asia-southeast1.firebasedatabase.app/" };
+    let db = null;
+    try { db = getDatabase(initializeApp(firebaseConfig)); } catch(e){}
+
+    let currentUser = JSON.parse(localStorage.getItem('COUPLE_CALENDAR_USER'));
+    if(!currentUser) window.location.href = "index.html";
+
+    // 1. MÃ PHÒNG MẶC ĐỊNH RANDOM NẾU LẦN ĐẦU ĐĂNG KÝ
+    if(!currentUser.roomCode) {
+      currentUser.roomCode = 'ROOM_' + Math.floor(100000 + Math.random() * 900000);
+      currentUser.isRoomCodeLocked = false;
+      localStorage.setItem('COUPLE_CALENDAR_USER', JSON.stringify(currentUser));
+    }
+
+    window.currentMonth = 10;
+    window.currentYear = 2026;
+    window.currentFilter = 'all';
+    window.activeTab = 'common';
+    window.appData = {};
+    window.activeKeyForView = null;
+
+    function initApp() {
+      document.getElementById('currentDisplayUser').innerText = currentUser.nickname || currentUser.username;
+      document.getElementById('displayRoomCode').innerText = currentUser.roomCode;
+      setupFirebaseSync();
+      renderMonthNav();
+      renderCalendar();
+    }
+
+    // CHUYỂN TAB LỊCH CHUNG KHỎI LỊCH CÁ NHÂN
+    window.switchCalendarTab = function(tab) {
+      window.activeTab = tab;
+      const btnC = document.getElementById('btnTabCommon');
+      const btnP = document.getElementById('btnTabPersonal');
+      const modeB = document.getElementById('calendarModeBadge');
+
+      if (tab === 'common') {
+        btnC.className = "px-3 py-1 rounded-full text-xs font-black bg-white text-pink-600 shadow-sm transition-all";
+        btnP.className = "px-3 py-1 rounded-full text-xs font-black text-white hover:text-pink-100 transition-all";
+        modeB.innerText = "LỊCH CHUNG";
+        modeB.className = "bg-pink-600 text-white px-3 py-1 rounded-xl text-xs font-black";
+      } else {
+        btnP.className = "px-3 py-1 rounded-full text-xs font-black bg-white text-purple-600 shadow-sm transition-all";
+        btnC.className = "px-3 py-1 rounded-full text-xs font-black text-white hover:text-pink-100 transition-all";
+        modeB.innerText = "LỊCH CÁ NHÂN";
+        modeB.className = "bg-purple-600 text-white px-3 py-1 rounded-xl text-xs font-black";
+      }
+      setupFirebaseSync();
+    };
+
+    function setupFirebaseSync() {
+      if (!db) { renderCalendar(); return; }
+      
+      let dbPath = window.activeTab === 'common' 
+        ? `rooms/${currentUser.roomCode}/calendar`
+        : `users/${currentUser.username}/personal_calendar`;
+
+      onValue(ref(db, dbPath), (snapshot) => {
+        window.appData = snapshot.val() || {};
+        renderCalendar();
+      });
+    }
+
+    window.saveDataToCloud = function(dayKey, payload) {
+      window.appData[dayKey] = payload;
+      let dbPath = window.activeTab === 'common' 
+        ? `rooms/${currentUser.roomCode}/calendar/${dayKey}`
+        : `users/${currentUser.username}/personal_calendar/${dayKey}`;
+
+      if(db) set(ref(db, dbPath), payload);
+      renderCalendar();
+    };
+
+    // 2. KIỂM TRA ĐIỀU KIỆN KHÓA MÃ PHÒNG (CHỈ NHẬP ĐƯỢC 1 LẦN)
+    window.openSettingsModal = function() {
+      document.getElementById('settingNickname').value = currentUser.nickname || '';
+      document.getElementById('settingRole').value = currentUser.role || 'Boy';
+      
+      const roomInput = document.getElementById('settingRoomCode');
+      roomInput.value = currentUser.roomCode || '';
+      
+      if (currentUser.isRoomCodeLocked) {
+        roomInput.disabled = true;
+        document.getElementById('roomCodeWarning').innerText = "🔒 Mã phòng đã khóa cố định do bạn đã từng thay đổi trước đó.";
+      } else {
+        roomInput.disabled = false;
+        document.getElementById('roomCodeWarning').innerText = "⚠️ Mã phòng hiện tại ngẫu nhiên. Bạn có thể nhập mã đối phương (Chỉ sửa 1 lần duy nhất)!";
+      }
+      document.getElementById('settingsModal').classList.remove('opacity-0', 'pointer-events-none');
+    };
+
+    window.closeSettingsModal = function() {
+      document.getElementById('settingsModal').classList.add('opacity-0', 'pointer-events-none');
+    };
+
+    window.saveSettings = function() {
+      const newNickname = document.getElementById('settingNickname').value.trim();
+      const newRole = document.getElementById('settingRole').value;
+      const newRoom = document.getElementById('settingRoomCode').value.trim();
+
+      if (!currentUser.isRoomCodeLocked && newRoom && newRoom !== currentUser.roomCode) {
+        currentUser.roomCode = newRoom;
+        currentUser.isRoomCodeLocked = true;
+      }
+
+      currentUser.nickname = newNickname || currentUser.username;
+      currentUser.role = newRole;
+
+      localStorage.setItem('COUPLE_CALENDAR_USER', JSON.stringify(currentUser));
+      if (db) set(ref(db, `users/${currentUser.username}/profile`), currentUser);
+      closeSettingsModal();
+      initApp();
+    };
+
+    window.logout = function() { localStorage.removeItem('COUPLE_CALENDAR_USER'); window.location.href = "index.html"; };
+
+    const monthDaysCount = { 1:31, 2:28, 3:31, 4:30, 5:31, 6:30, 7:31, 8:31, 9:30, 10:31, 11:30, 12:31 };
+    window.switchMonth = function(m) { window.currentMonth = m; renderMonthNav(); renderCalendar(); };
+    window.filterStatus = function() { window.currentFilter = document.getElementById('statusFilter').value; renderCalendar(); };
+
+    function renderMonthNav() {
+      const container = document.getElementById('month-buttons-container');
+      container.innerHTML = '';
+      for (let m = 1; m <= 12; m++) {
+        const btn = document.createElement('button');
+        btn.className = `px-2 py-0.5 rounded-full text-[10px] font-black ${m === window.currentMonth ? 'bg-white text-pink-600 shadow-sm' : 'text-white'}`;
+        btn.innerText = `T${m}`;
+        btn.onclick = () => window.switchMonth(m);
+        container.appendChild(btn);
+      }
+    }
+
+    // 3. RENDER LƯỚI LỊCH TỐI ƯU SỐ NGÀY PHÓNG TO NỔI BẬT
+    window.renderCalendar = function() {
+      const grid = document.getElementById('calendarGrid');
+      grid.innerHTML = '';
+      document.getElementById('monthTitleBadge').innerText = `THÁNG ${window.currentMonth} / ${window.currentYear}`;
+      document.getElementById('displayRoomCode').innerText = currentUser?.roomCode;
+
+      const firstDayObj = new Date(window.currentYear, window.currentMonth - 1, 1);
+      let dayOfWeek = firstDayObj.getDay() - 1;
+      if (dayOfWeek === -1) dayOfWeek = 6;
+
+      for (let i = 0; i < dayOfWeek; i++) grid.appendChild(document.createElement('div'));
+
+      const totalDays = monthDaysCount[window.currentMonth];
+      let paidTotal = 0, unpaidTotal = 0;
+
+      for (let day = 1; day <= totalDays; day++) {
+        const dayKey = `${window.currentYear}-${window.currentMonth}-${day}`;
+        const dayData = window.appData[dayKey] || { activity: '', text: '', isPaid: false };
+
+        if (dayData.isPaid) paidTotal++; else unpaidTotal++;
+        if (window.currentFilter === 'paid' && !dayData.isPaid) continue;
+        if (window.currentFilter === 'unpaid' && dayData.isPaid) continue;
+
+        const formattedDay = day < 10 ? `0${day}` : day;
+        const card = document.createElement('div');
+        card.className = "day-card group cursor-pointer select-none";
+        
+        // CLICK THẺ ĐỂ BẬT POPUP XEM CHI TIẾT
+        card.onclick = () => openViewModal(dayKey, `${formattedDay}/${window.currentMonth}`);
+
+        card.innerHTML = `
+          <div class="glass-card-top">
+            <button onclick="openModal(event, '${dayKey}', '${formattedDay}/${window.currentMonth}')" title="Sửa" class="absolute top-1 right-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-white/90 text-slate-700 flex items-center justify-center text-[8px] sm:text-[9px] shadow-sm z-10 hover:bg-pink-100">
+              <i class="fa-solid fa-pen"></i>
+            </button>
+            <div class="text-[7px] sm:text-[8px] font-black text-slate-500 uppercase">NGÀY</div>
+            
+            <!-- SỐ NGÀY PHÓNG TO NỔI BẬT -->
+            <div class="text-xl sm:text-3xl font-black text-slate-900 leading-none my-0.5 drop-shadow-sm">${formattedDay}</div>
+            
+            <div class="text-[8px] sm:text-[9px] font-black text-pink-600 truncate min-h-[12px] sm:min-h-[14px] px-0.5">
+              ${dayData.activity || ''}
+            </div>
+
+            <!-- CHỈ BÁO HOÀN THÀNH BẰNG ĐIỂM SÁNG NÚT GẠT -->
+            <div class="mt-0.5 flex items-center justify-center">
+              <span class="inline-block w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full ${dayData.isPaid ? 'bg-emerald-500 ring-2 ring-emerald-200' : 'bg-slate-300'}"></span>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      }
+      document.getElementById('paidCount').innerText = paidTotal;
+      document.getElementById('unpaidCount').innerText = unpaidTotal;
+    };
+
+    // 4. POP-UP XEM PHÓNG TO KHI ẤN VÀO THẺ
+    window.openViewModal = function(dayKey, dateStr) {
+      window.activeKeyForView = dayKey;
+      const dayData = window.appData[dayKey] || { activity: '', text: '', isPaid: false };
+      
+      document.getElementById('viewModalDate').innerText = `NGÀY ${dateStr}`;
+      document.getElementById('viewActivityText').innerText = dayData.activity || 'CHƯA CÓ CHỮ TO';
+      document.getElementById('viewDetailText').innerText = dayData.text || 'Chưa có ghi chú chi tiết cho ngày này.';
+      document.getElementById('viewModalPaidSwitch').checked = dayData.isPaid;
+
+      document.getElementById('viewModal').classList.remove('opacity-0', 'pointer-events-none');
+      document.getElementById('viewModalBox').classList.remove('scale-95');
+    };
+
+    window.closeViewModal = function() {
+      document.getElementById('viewModal').classList.add('opacity-0', 'pointer-events-none');
+      document.getElementById('viewModalBox').classList.add('scale-95');
+    };
+
+    window.toggleStatusFromView = function() {
+      if(!window.activeKeyForView) return;
+      const current = window.appData[window.activeKeyForView] || {};
+      const isChecked = document.getElementById('viewModalPaidSwitch').checked;
+      window.saveDataToCloud(window.activeKeyForView, { ...current, isPaid: isChecked });
+    };
+
+    window.openEditFromView = function() {
+      const dayKey = window.activeKeyForView;
+      const dateStr = document.getElementById('viewModalDate').innerText.replace('NGÀY ', '');
+      closeViewModal();
+      openModal(null, dayKey, dateStr);
+    };
+
+    let activeEditingKey = null;
+    window.openModal = function(event, dayKey, dateStr) {
+      if(event) event.stopPropagation();
+      activeEditingKey = dayKey;
+      document.getElementById('modalTitle').innerText = `Ghi chú ngày ${dateStr}`;
+      const dayData = window.appData[dayKey] || {};
+      document.getElementById('modalActivity').value = dayData.activity || '';
+      document.getElementById('modalText').value = dayData.text || '';
+      document.getElementById('modalPaidSwitch').checked = dayData.isPaid || false;
+      document.getElementById('editModal').classList.remove('opacity-0', 'pointer-events-none');
+    };
+
+    window.closeModal = function() { document.getElementById('editModal').classList.add('opacity-0', 'pointer-events-none'); };
+    
+    window.saveModalData = function() {
+      if(!activeEditingKey) return;
+      window.saveDataToCloud(activeEditingKey, {
+        activity: document.getElementById('modalActivity').value.trim(),
+        text: document.getElementById('modalText').value.trim(),
+        isPaid: document.getElementById('modalPaidSwitch').checked
+      });
+      closeModal();
+    };
+
+    initApp();
+  </script>
+</body>
+</html>

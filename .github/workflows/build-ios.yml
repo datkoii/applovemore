@@ -1,0 +1,44 @@
+name: Build iOS IPA
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Capacitor CLI
+        run: |
+          npm install @capacitor/core @capacitor/cli @capacitor/ios
+
+      - name: Sync iOS Project
+        run: |
+          npx cap add ios || true
+          npx cap sync ios
+
+      - name: Build Xcode Project
+        run: |
+          cd ios/App
+          xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -sdk iphoneos -derivedDataPath build CODE_SIGNING_ALLOWED=NO
+
+      - name: Package to IPA
+        run: |
+          mkdir -p Payload
+          cp -r ios/App/build/Build/Products/Release-iphoneos/App.app Payload/
+          zip -r App.ipa Payload
+
+      - name: Upload IPA Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ios-app-ipa
+          path: App.ipa
