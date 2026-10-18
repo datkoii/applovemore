@@ -20,13 +20,14 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install @capacitor/core @capacitor/cli @capacitor/ios
-          chmod -R +x node_modules/.bin || true
 
-      - name: Setup Capacitor and iOS Platform
+      - name: Re-create iOS Platform
         run: |
+          rm -rf ios
           npx cap init "AppLoveMore" "com.datkoii.applovemore" --web-dir www --no-interaction || true
-          npx cap add ios || true
+          npx cap add ios
           npx cap sync ios
+          cd ios/App && pod install || true
 
       - name: Build Xcode Project
         run: |
