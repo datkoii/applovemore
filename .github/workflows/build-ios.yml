@@ -17,12 +17,15 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install Capacitor CLI
+      - name: Install Dependencies & Fix Permissions
         run: |
+          npm install
           npm install @capacitor/core @capacitor/cli @capacitor/ios
+          chmod -R +x node_modules/.bin || true
 
-      - name: Sync iOS Project
+      - name: Add and Sync iOS
         run: |
+          npx cap init "AppLoveMore" "com.datkoii.applovemore" --web-dir www || true
           npx cap add ios || true
           npx cap sync ios
 
